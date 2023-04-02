@@ -220,9 +220,10 @@ function jimmyDean() {
 
 function testForDie() {
   if (atDoor2 && !door2Closed) {
-    Swal.fire("Insert jumpscare here", "You died :/", "error").then(() => {
+    document.getElementById("jumpscare1").style.display = "block";
+    setTimeout(() => {
       window.location.reload();
-    });
+    }, 3000);
   } else if (atDoor2) {
     setTimeout(testForDie, Math.random() * 3000 + 5000);
   }
