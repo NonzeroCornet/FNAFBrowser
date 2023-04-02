@@ -39,40 +39,44 @@ var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jimmyDeanPosition = 0;
 var hideJimmy = true;
 
+var clockCycle;
+
 Swal.fire(
   "Welcome To The Demo!",
   "Note that this is, like I said, a demo. Kind of a poor one as well. But hey, it is what it is. As soon as you click OK, the game will start. Made by Brian Dean Ullery.",
   "info"
 ).then(() => {
-  ringingNoise.volume = 0.4;
-  ringingNoise.play();
-  fanNoise.play();
   setTimeout(() => {
-    ringingNoise.pause();
-    phone.style.opacity = 0;
-    document.querySelectorAll("button")[3].style.display = "none";
-  }, 15000);
-});
-
-var clockCycle = setInterval(() => {
-  clock.style.opacity = 1;
-  time += 1;
-  if (time == 1) {
-    setTimeout(jimmyDean, Math.random() * 10000);
-  } else if (time == 2) {
-    clock.src = "/assets/images/3am.png";
-  } else if (time == 3) {
-    clock.src = "/assets/images/4_30am.png";
-  } else if (time == 4) {
-    clock.src = "/assets/images/6am.gif";
+    beginNight1.style.display = "none";
+    ringingNoise.volume = 0.4;
+    ringingNoise.play();
+    fanNoise.play();
+    clockCycle = setInterval(() => {
+      clock.style.opacity = 1;
+      time += 1;
+      if (time == 1) {
+        setTimeout(jimmyDean, Math.random() * 10000);
+      } else if (time == 2) {
+        clock.src = "/assets/images/3am.png";
+      } else if (time == 3) {
+        clock.src = "/assets/images/4_30am.png";
+      } else if (time == 4) {
+        clock.src = "/assets/images/6am.gif";
+        setTimeout(() => {
+          Swal.fire("6 AM", "YOU WIN!", "success").then(() => {
+            window.location.reload();
+          });
+          clearInterval(clockCycle);
+        }, 4000);
+      }
+    }, 133750);
     setTimeout(() => {
-      Swal.fire("6 AM", "YOU WIN!", "success").then(() => {
-        window.location.reload();
-      });
-      clearInterval(clockCycle);
-    }, 4000);
-  }
-}, 133750);
+      ringingNoise.pause();
+      phone.style.opacity = 0;
+      document.querySelectorAll("button")[3].style.display = "none";
+    }, 15000);
+  });
+});
 
 function activateLight(btn) {
   if (door2Closed || doorlightOn) {
