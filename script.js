@@ -75,7 +75,7 @@ Swal.fire(
       phone.style.opacity = 0;
       document.querySelectorAll("button")[3].style.display = "none";
     }, 15000);
-  });
+  }, 2000);
 });
 
 function activateLight(btn) {
