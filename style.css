@@ -1,0 +1,45 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #0f0f0f;
+}
+
+.game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -281.25px;
+  margin-left: -500px;
+  width: 1000px;
+  height: 562.5px;
+  background: url(assets/images/background.gif) no-repeat center center;
+  background-size: contain;
+}
+
+.wallbtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.bad {
+  position: absolute;
+  opacity: 0;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.phone {
+  animation: blink-animation 2s steps(2, start) infinite;
+  position: absolute;
+}
