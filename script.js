@@ -37,7 +37,9 @@ var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
 var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
+nightStartNoise.volume = 0.25;
 var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
+nightEndNoise.volume = 0.25;
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
@@ -84,7 +86,7 @@ Swal.fire(
       phone.style.opacity = 0;
       document.querySelectorAll("button")[3].style.display = "none";
     }, 15000);
-  }, 2000);
+  }, 4000);
 });
 
 function activateLight(btn) {
