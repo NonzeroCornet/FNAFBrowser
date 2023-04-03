@@ -39,25 +39,11 @@ var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
-var bgNoise = new Audio("/assets/sounds/bg.mp3");
-bgNoise.loop = true;
-bgNoise.volume = 0.05;
 
 var jimmyDeanPosition = 0;
 var hideJimmy = true;
 
 var clockCycle;
-
-function fadeOut(sound, length) {
-  let fading = setInterval(() => {
-    if (sound.volume - 1 / (length * 1000) > 0) {
-      sound.volume -= 1 / (length * 1000);
-    } else {
-      sound.volume = 0;
-      clearInterval(fading);
-    }
-  }, 1);
-}
 
 Swal.fire(
   "Welcome To The Demo!",
@@ -70,13 +56,11 @@ Swal.fire(
     ringingNoise.play();
     fanNoise.play();
     sirenNoise.play();
-    bgNoise.play();
     clockCycle = setInterval(() => {
       clock.style.opacity = 1;
       time += 1;
       if (time == 1) {
         setTimeout(jimmyDean, Math.random() * 10000);
-        fadeOut(bgNoise, 10);
       } else if (time == 2) {
         clock.src = "/assets/images/3am.png";
       } else if (time == 3) {
