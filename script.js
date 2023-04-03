@@ -36,6 +36,8 @@ var doorCloseNoise = new Audio("/assets/sounds/doorClose.mp3");
 var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
+var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
+var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
@@ -50,6 +52,7 @@ Swal.fire(
   "Note that this is, like I said, a demo. Kind of a poor one as well. But hey, it is what it is. As soon as you click OK, the game will start. Made by Brian Dean Ullery.",
   "info"
 ).then(() => {
+  nightStartNoise.play();
   setTimeout(() => {
     beginNight1.style.display = "none";
     ringingNoise.volume = 0.4;
@@ -68,6 +71,7 @@ Swal.fire(
       } else if (time == 4) {
         clock.src = "/assets/images/6am.gif";
         setTimeout(() => {
+          nightEndNoise.play();
           Swal.fire("6 AM", "YOU WIN!", "success").then(() => {
             window.location.reload();
           });
