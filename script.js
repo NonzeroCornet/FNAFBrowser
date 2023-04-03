@@ -118,7 +118,7 @@ setInterval(() => {
 
 Swal.fire(
   "Welcome To The Demo!",
-  "Note that this is, like I said, a demo. Kind of a poor one as well. But hey, it is what it is. As soon as you click OK, the game will start. v0.0.21 BETA. Created by Brian Dean Ullery.",
+  "Note that this is, like I said, a demo. Kind of a poor one as well. But hey, it is what it is. As soon as you click OK, the game will start. v0.0.24 BETA. Created by Brian Dean Ullery.",
   "info"
 ).then(() => {
   nightStartNoise.play();
