@@ -52,6 +52,40 @@ var hideJimmy = true;
 
 var clockCycle;
 
+$(document).ready(function () {
+  var width = document.getElementsByClassName("game")[0].offsetWidth;
+  var height = document.getElementsByClassName("game")[0].offsetHeight;
+  var windowWidth = $(document).outerWidth();
+  var windowHeight = $(document).outerHeight();
+  var r = 1;
+  r = Math.min(windowWidth / width, windowHeight / height);
+
+  $(".game").css({
+    "-webkit-transform": "scale(" + r + ")",
+    "-moz-transform": "scale(" + r + ")",
+    "-ms-transform": "scale(" + r + ")",
+    "-o-transform": "scale(" + r + ")",
+    transform: "scale(" + r + ")",
+  });
+});
+
+window.addEventListener("resize", () => {
+  var width = document.getElementsByClassName("game")[0].offsetWidth;
+  var height = document.getElementsByClassName("game")[0].offsetHeight;
+  var windowWidth = $(document).outerWidth();
+  var windowHeight = $(document).outerHeight();
+  var r = 1;
+  r = Math.min(windowWidth / width, windowHeight / height);
+
+  $(".game").css({
+    "-webkit-transform": "scale(" + r + ")",
+    "-moz-transform": "scale(" + r + ")",
+    "-ms-transform": "scale(" + r + ")",
+    "-o-transform": "scale(" + r + ")",
+    transform: "scale(" + r + ")",
+  });
+});
+
 setInterval(() => {
   if (door2Closed) {
     doorUseTime++;
