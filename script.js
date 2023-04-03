@@ -44,10 +44,43 @@ var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
 
+var doorUseTime = 0;
+var lightUseTime = 0;
+
 var jimmyDeanPosition = 0;
 var hideJimmy = true;
 
 var clockCycle;
+
+setInterval(() => {
+  if (door2Closed) {
+    doorUseTime++;
+    if (doorUseTime > 30000) {
+      doorOpenNoise.play();
+      door2Closed = false;
+      doorClosed.style.opacity = 0;
+      document.querySelectorAll("button")[0].style.background = "transparent";
+      setTimeout(() => {
+        doorClosing.style.opacity = 0;
+      }, 20);
+    }
+  }
+  if (doorUseTime > 30000) {
+    doorClosed.style.opacity = 0;
+    doorClosing.style.opacity = 0;
+  }
+  if (doorlightOn) {
+    lightUseTime++;
+    if (lightUseTime > 30000) {
+      emptyDoorLight.style.opacity = 0;
+      badDoorLight.style.opacity = 0;
+      document.querySelectorAll("button")[1].style.background = "transparent";
+      doorlightOn = false;
+      buzzingNoise.pause();
+      sirenNoise.volume = 0;
+    }
+  }
+}, 1);
 
 Swal.fire(
   "Welcome To The Demo!",
@@ -90,50 +123,53 @@ Swal.fire(
 });
 
 function activateLight(btn) {
-  if (door2Closed || doorlightOn) {
-    emptyDoorLight.style.opacity = 0;
-    badDoorLight.style.opacity = 0;
-    btn.style.background = "transparent";
-    doorlightOn = false;
-    buzzingNoise.pause();
-    sirenNoise.volume = 0;
-  } else {
-    if (atDoor2) {
-      badDoorLight.style.opacity = 1;
-      sirenNoise.volume = 1;
-    } else {
-      emptyDoorLight.style.opacity = 1;
+  if (lightUseTime < 300000) {
+    if (door2Closed || doorlightOn) {
+      emptyDoorLight.style.opacity = 0;
+      badDoorLight.style.opacity = 0;
+      btn.style.background = "transparent";
+      doorlightOn = false;
+      buzzingNoise.pause();
       sirenNoise.volume = 0;
+    } else {
+      if (atDoor2) {
+        badDoorLight.style.opacity = 1;
+        sirenNoise.volume = 1;
+      } else {
+        emptyDoorLight.style.opacity = 1;
+        sirenNoise.volume = 0;
+      }
+      btn.style.background = "#888888";
+      doorlightOn = true;
+      buzzingNoise.play();
     }
-    btn.style.background = "#888888";
-    doorlightOn = true;
-    buzzingNoise.play();
   }
 }
-
 function closeDoor(btn) {
-  if (door2Closed) {
-    doorOpenNoise.play();
-    door2Closed = false;
-    doorClosed.style.opacity = 0;
-    btn.style.background = "transparent";
-    setTimeout(() => {
-      doorClosing.style.opacity = 0;
-    }, 20);
-  } else {
-    doorCloseNoise.play();
-    door2Closed = true;
-    doorlightOn = false;
-    buzzingNoise.pause();
-    doorClosing.style.opacity = 1;
-    emptyDoorLight.style.opacity = 0;
-    badDoorLight.style.opacity = 0;
-    document.querySelectorAll("button")[1].style.background = "transparent";
-    btn.style.background = "darkred";
-    setTimeout(() => {
-      doorClosed.style.opacity = 1;
-      sirenNoise.volume = 0;
-    }, 20);
+  if (doorUseTime < 300000) {
+    if (door2Closed) {
+      doorOpenNoise.play();
+      door2Closed = false;
+      doorClosed.style.opacity = 0;
+      btn.style.background = "transparent";
+      setTimeout(() => {
+        doorClosing.style.opacity = 0;
+      }, 20);
+    } else {
+      doorCloseNoise.play();
+      door2Closed = true;
+      doorlightOn = false;
+      buzzingNoise.pause();
+      doorClosing.style.opacity = Number(doorUseTime < 300000);
+      emptyDoorLight.style.opacity = 0;
+      badDoorLight.style.opacity = 0;
+      document.querySelectorAll("button")[1].style.background = "transparent";
+      btn.style.background = "darkred";
+      setTimeout(() => {
+        doorClosed.style.opacity = Number(doorUseTime < 300000);
+        sirenNoise.volume = 0;
+      }, 20);
+    }
   }
 }
 
