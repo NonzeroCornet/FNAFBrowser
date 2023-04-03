@@ -35,6 +35,7 @@ var doorOpenNoise = new Audio("/assets/sounds/doorOpen.mp3");
 var doorCloseNoise = new Audio("/assets/sounds/doorClose.mp3");
 var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
+var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
@@ -249,6 +250,8 @@ function jimmyDean() {
 function testForDie() {
   if (atDoor2 && !door2Closed) {
     document.getElementById("jumpscare1").style.display = "block";
+    sirenNoise.volume = 0;
+    jumpscareNoise.play();
     setTimeout(() => {
       window.location.reload();
     }, 3000);
