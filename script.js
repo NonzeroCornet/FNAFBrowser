@@ -192,7 +192,7 @@ function jimmyDean() {
   randomWalk = Math.round(Math.random() * 5);
   if (randomWalk <= 1) {
     jimmyDeanPosition--;
-  } else if (randomWalk <= time+1) {
+  } else if (randomWalk <= time + 2) {
     jimmyDeanPosition++;
   }
   jimmyDeanPosition = Math.max(Math.min(jimmyDeanPosition, 4), 0);
