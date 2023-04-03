@@ -35,11 +35,29 @@ var doorOpenNoise = new Audio("/assets/sounds/doorOpen.mp3");
 var doorCloseNoise = new Audio("/assets/sounds/doorClose.mp3");
 var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
+var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
+sirenNoise.loop = true;
+sirenNoise.volume = 0;
+var bgNoise = new Audio("/assets/sounds/bg.mp3");
+bgNoise.loop = true;
+bgNoise.volume = 0;
+
 
 var jimmyDeanPosition = 0;
 var hideJimmy = true;
 
 var clockCycle;
+
+function fadeIn(sound, length) {
+  let fading = setInterval(() => {
+    if (sound.volume < 0.15) {
+      sound.volume += 1 / (length*1000);
+    } else {
+      sound.volume = 0.15;
+      clearInterval(fading);
+    }
+  }, 1);
+}
 
 Swal.fire(
   "Welcome To The Demo!",
@@ -51,11 +69,14 @@ Swal.fire(
     ringingNoise.volume = 0.4;
     ringingNoise.play();
     fanNoise.play();
+    sirenNoise.play();
+    bgNoise.play();
     clockCycle = setInterval(() => {
       clock.style.opacity = 1;
       time += 1;
       if (time == 1) {
         setTimeout(jimmyDean, Math.random() * 10000);
+        fadeIn(bgNoise, 10);
       } else if (time == 2) {
         clock.src = "/assets/images/3am.png";
       } else if (time == 3) {
@@ -85,11 +106,14 @@ function activateLight(btn) {
     btn.style.background = "transparent";
     doorlightOn = false;
     buzzingNoise.pause();
+    sirenNoise.volume = 0;
   } else {
     if (atDoor2) {
       badDoorLight.style.opacity = 1;
+      sirenNoise.volume = 1;
     } else {
       emptyDoorLight.style.opacity = 1;
+      sirenNoise.volume = 0;
     }
     btn.style.background = "#888888";
     doorlightOn = true;
@@ -118,6 +142,7 @@ function closeDoor(btn) {
     btn.style.background = "darkred";
     setTimeout(() => {
       doorClosed.style.opacity = 1;
+      sirenNoise.volume = 0;
     }, 20);
   }
 }
