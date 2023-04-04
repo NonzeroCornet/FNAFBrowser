@@ -319,11 +319,11 @@ function spookyNoises() {
   let sound = Math.round(Math.random() * 100);
   let noise;
   if (sound == 0) {
-    noise = new Audio("/assets/sounds/say3.mp3");
+    noise = new Audio("/assets/sounds/say3.wav");
   } else if (sound < 50) {
-    noise = new Audio("/assets/sounds/say2.mp3");
+    noise = new Audio("/assets/sounds/say2.wav");
   } else {
-    noise = new Audio("/assets/sounds/say1.mp3");
+    noise = new Audio("/assets/sounds/say1.wav");
   }
   noise.play();
   setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 30000));
