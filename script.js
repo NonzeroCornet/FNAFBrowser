@@ -20,10 +20,11 @@ var badDoorLight = document.querySelectorAll("img")[1];
 var doorClosing = document.querySelectorAll("img")[2];
 var doorClosed = document.querySelectorAll("img")[3];
 var phone = document.querySelectorAll("img")[6];
-var clock = document.querySelectorAll("img")[7];
+var lorePoster = document.querySelectorAll("img")[7];
+var clock = document.querySelectorAll("img")[8];
 var mailBad = document.querySelectorAll("img")[4];
-var map = document.querySelectorAll("img")[8];
-var mapBad = document.querySelectorAll("img")[9];
+var map = document.querySelectorAll("img")[9];
+var mapBad = document.querySelectorAll("img")[10];
 
 var ringingNoise = new Audio("/assets/sounds/ring.wav");
 ringingNoise.loop = true;
@@ -238,6 +239,7 @@ blinkDoorLight();
 
 function toggleMap(oo) {
   if (oo) {
+    lorePoster.style.opacity = 0;
     monitorOnNoise.currentTime = 0;
     monitorOnNoise.play();
     map.style.display = "block";
@@ -245,6 +247,9 @@ function toggleMap(oo) {
       mapBad.style.display = "block";
     }
   } else {
+    if (Math.round(Math.random() * 100) == 0) {
+      lorePoster.style.opacity = 1;
+    }
     monitorOffNoise.currentTime = 0;
     monitorOffNoise.play();
     map.style.display = "none";
