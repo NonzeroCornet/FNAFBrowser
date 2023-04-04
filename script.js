@@ -149,7 +149,7 @@ setTimeout(() => {
     phone.style.opacity = 0;
     document.querySelectorAll("button")[3].style.display = "none";
   }, 15000);
-}, 4000);
+}, 6000);
 
 function activateLight(btn) {
   if (lightUseTime < 300000) {
