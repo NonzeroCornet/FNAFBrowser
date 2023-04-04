@@ -314,3 +314,18 @@ function testForDie() {
     setTimeout(testForDie, Math.random() * 3000 + 5000);
   }
 }
+
+function spookyNoises() {
+  let sound = Math.round(Math.random() * 100);
+  let noise;
+  if (sound == 0) {
+    noise = new Audio("/assets/sounds/say3.mp3");
+  } else if (sound < 50) {
+    noise = new Audio("/assets/sounds/say2.mp3");
+  } else {
+    noise = new Audio("/assets/sounds/say1.mp3");
+  }
+  noise.play();
+  setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 30000));
+}
+setTimeout(spookyNoises, Math.round(Math.random() * 10000) + 118000);
