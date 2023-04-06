@@ -255,11 +255,6 @@ function toggleMap(oo) {
     if (!hideJimmy) {
       mapBad.style.display = "block";
     }
-  } else {
-    if (Math.round(Math.random() * 100) == 0) {
-      lorePoster.style.opacity = 1;
-    }
-
     if (halCanOpen) {
       halCanOpen = false;
       mailBad.style.opacity = 1;
@@ -273,6 +268,10 @@ function toggleMap(oo) {
           }, 3000);
         }
       }, 3000);
+    }
+  } else {
+    if (Math.round(Math.random() * 100) == 0) {
+      lorePoster.style.opacity = 1;
     }
 
     monitorOffNoise.currentTime = 0;
