@@ -283,10 +283,10 @@ function toggleMap(oo) {
 
 function jimmyDean() {
   jimmyDeanPosition == 4 ? (jimmyDeanPosition = 2) : jimmyDeanPosition;
-  randomWalk = Math.round(Math.random() * 5);
+  randomWalk = Math.round(Math.random() * 9);
   if (randomWalk <= 1) {
     jimmyDeanPosition--;
-  } else if (randomWalk <= time + 2) {
+  } else if (randomWalk <= time + 5) {
     jimmyDeanPosition++;
   }
   jimmyDeanPosition = Math.max(Math.min(jimmyDeanPosition, 4), 0);
@@ -366,7 +366,10 @@ function spookyNoises() {
 
 function halHubert() {
   halCanOpen = true;
-  setTimeout(halHubert, (Math.random() * 50000 + 10000) / halDifficulty);
+  setTimeout(
+    halHubert,
+    (Math.random() * 50000 + 10000) / (halDifficulty + time)
+  );
 }
 
 setTimeout(() => {
