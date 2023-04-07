@@ -15,6 +15,8 @@ var mapPositions = {
   storage: "circle(7.6% at 12% 72%)",
 };
 
+var jimmyDifficulty = 1;
+
 var emptyDoorLight = document.querySelectorAll("img")[0];
 var badDoorLight = document.querySelectorAll("img")[1];
 var doorClosing = document.querySelectorAll("img")[2];
@@ -304,7 +306,7 @@ function jimmyDean() {
       mapBad.style.display = "none";
     }
   }, 1000);
-  setTimeout(jimmyDean, Math.random() * 30000 + 10000);
+  setTimeout(jimmyDean, (Math.random() * 7500 + 2500) / (jimmyDifficulty / 4));
 }
 
 function testForDie() {

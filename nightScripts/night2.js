@@ -328,7 +328,7 @@ function jimmyDean() {
       mapBad.style.display = "none";
     }
   }, 1000);
-  setTimeout(jimmyDean, (Math.random() * 30000 + 10000) / jimmyDifficulty);
+  setTimeout(jimmyDean, (Math.random() * 7500 + 2500) / (jimmyDifficulty / 4));
 }
 
 function testForDie() {
@@ -368,7 +368,7 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 50000 + 10000) / (halDifficulty + time)
+    (Math.random() * 12500 + 2500) / (halDifficulty / 4 + time)
   );
 }
 
