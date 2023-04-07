@@ -212,7 +212,7 @@ function closeDoor(btn) {
 }
 
 function pickupPhone(btn) {
-  let call = new Audio("/assets/sounds/night2.wav");
+  let call = new Audio("/assets/sounds/night3.wav");
   call.play();
   ringingNoise.pause();
   phone.style.opacity = 0;
@@ -288,9 +288,8 @@ function toggleMap(oo) {
     leftDoorBad.style.opacity = 1;
     setTimeout(() => {
       if (leftDoorBad.style.opacity == 1) {
-        document.getElementById("jumpscare2").style.display = "block";
+        document.getElementById("jumpscare3").style.display = "block";
         sirenNoise.volume = 0;
-        jumpscareNoise.play();
         setTimeout(() => {
           window.location.href = "/";
         }, 3000);
