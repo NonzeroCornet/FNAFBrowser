@@ -43,4 +43,45 @@
       border: none;
     "
   ></iframe>
+  <script>
+    var sequence = 0;
+    function cheatCode() {
+      document.body.display = "none";
+      window.location !== window.parent.location
+        ? (window.location.href = "/nightHTMLs/night1.html")
+        : (document.getElementsByTagName("iframe")[0].style.display = "block");
+      document.getElementsByTagName("iframe")[0].src =
+        "/nightHTMLs/night3.html";
+    }
+    window.addEventListener("keydown", (event) => {
+      switch (sequence) {
+        case 0:
+          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
+          break;
+        case 1:
+          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
+          break;
+        case 2:
+          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
+          break;
+        case 3:
+          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
+          break;
+        case 4:
+          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
+          break;
+        case 5:
+          event.key == "ArrowLeft" ? sequence++ : (sequence = 0);
+          break;
+        case 6:
+          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
+          break;
+        case 7:
+          event.key == "ArrowRight" ? cheatCode() : (sequence = 0);
+          break;
+        default:
+          break;
+      }
+    });
+  </script>
 </body>
