@@ -17,6 +17,8 @@ var mapPositions = {
 
 var halCanOpen = false;
 
+var halTimeOut;
+
 var jimmyDifficulty = 2;
 var halDifficulty = 1;
 
@@ -222,6 +224,7 @@ function closeMail() {
     closeSound.play();
   }
   mailBad.style.opacity = 0;
+  clearTimeout(halTimeOut);
 }
 
 function blinkDoorLight() {
@@ -258,7 +261,7 @@ function toggleMap(oo) {
     if (halCanOpen) {
       halCanOpen = false;
       mailBad.style.opacity = 1;
-      setTimeout(() => {
+      halTimeOut = setTimeout(() => {
         if (mailBad.style.opacity == 1) {
           document.getElementById("jumpscare2").style.display = "block";
           sirenNoise.volume = 0;
@@ -368,7 +371,7 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500 + 2500) / (halDifficulty / 4 + time)
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
   );
 }
 
@@ -376,3 +379,13 @@ setTimeout(() => {
   spookyNoises();
   setTimeout(halHubert, Math.round(Math.random() * 5000));
 }, Math.round(Math.random() * 10000) + 118000);
+
+document.body.onload = () => {
+  $("img").mousedown(function (e) {
+    e.preventDefault();
+  });
+
+  $("body").on("contextmenu", function (e) {
+    return false;
+  });
+};

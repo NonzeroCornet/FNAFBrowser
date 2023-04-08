@@ -8,7 +8,7 @@
     <title>FNAJ</title>
   </head>
 
-  <body>
+  <body oncontextmenu="return false;">
     <div class="game">
       <button
         class="wallbtn"
@@ -104,6 +104,7 @@
           width: 1000px;
           opacity: 0.5;
           height: 100px;
+          pointer-events: all;
         "
         src="../assets/images/mdsActivationBtn.png"
         onmouseover="toggleMap(true)"

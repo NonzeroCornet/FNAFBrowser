@@ -4,6 +4,10 @@ html {
   overflow: hidden;
 }
 
+img {
+  pointer-events: none;
+}
+
 body {
   background-color: #0f0f0f;
 }

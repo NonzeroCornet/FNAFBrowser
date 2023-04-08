@@ -18,6 +18,9 @@ var mapPositions = {
 var halCanOpen = false;
 var foxCanSpawn = false;
 
+var halTimeOut;
+var foxTimeOut;
+
 var jimmyDifficulty = 3;
 var halDifficulty = 2;
 var foxDifficulty = 1;
@@ -45,6 +48,7 @@ var doorCloseNoise = new Audio("/assets/sounds/doorClose.mp3");
 var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
+var foxyJumpscareNoise = new Audio("/assets/sounds/foxyJumpscare.mp3");
 var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
 nightStartNoise.volume = 0.25;
 var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
@@ -225,6 +229,7 @@ function closeMail() {
     closeSound.play();
   }
   mailBad.style.opacity = 0;
+  clearTimeout(halTimeOut);
 }
 
 function blinkDoorLight() {
@@ -261,7 +266,7 @@ function toggleMap(oo) {
     if (halCanOpen) {
       halCanOpen = false;
       mailBad.style.opacity = 1;
-      setTimeout(() => {
+      halTimeOut = setTimeout(() => {
         if (mailBad.style.opacity == 1) {
           document.getElementById("jumpscare2").style.display = "block";
           sirenNoise.volume = 0;
@@ -273,6 +278,7 @@ function toggleMap(oo) {
       }, 3000);
     }
     leftDoorBad.style.opacity = 0;
+    clearTimeout(foxTimeOut);
   } else {
     if (Math.round(Math.random() * 100) == 0) {
       lorePoster.style.opacity = 1;
@@ -286,10 +292,11 @@ function toggleMap(oo) {
   if (foxCanSpawn) {
     foxCanSpawn = false;
     leftDoorBad.style.opacity = 1;
-    setTimeout(() => {
+    foxTimeOut = setTimeout(() => {
       if (leftDoorBad.style.opacity == 1) {
         document.getElementById("jumpscare3").style.display = "block";
         sirenNoise.volume = 0;
+        foxyJumpscareNoise.play();
         setTimeout(() => {
           window.location.href = "/";
         }, 3000);
@@ -385,7 +392,7 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500 + 2500) / (halDifficulty / 4 + time)
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
   );
 }
 
@@ -402,3 +409,13 @@ setTimeout(() => {
   setTimeout(halHubert, Math.round(Math.random() * 5000));
   setTimeout(theFox, Math.round(Math.random() * 5000));
 }, Math.round(Math.random() * 10000) + 118000);
+
+document.body.onload = () => {
+  $("img").mousedown(function (e) {
+    e.preventDefault();
+  });
+
+  $("body").on("contextmenu", function (e) {
+    return false;
+  });
+};

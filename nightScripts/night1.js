@@ -342,3 +342,13 @@ function spookyNoises() {
   setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 30000));
 }
 setTimeout(spookyNoises, Math.round(Math.random() * 10000) + 118000);
+
+document.body.onload = () => {
+  $("img").mousedown(function (e) {
+    e.preventDefault();
+  });
+
+  $("body").on("contextmenu", function (e) {
+    return false;
+  });
+};
