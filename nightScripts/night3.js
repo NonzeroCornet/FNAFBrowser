@@ -296,6 +296,7 @@ function toggleMap(oo) {
       if (leftDoorBad.style.opacity == 1) {
         document.getElementById("jumpscare3").style.display = "block";
         sirenNoise.volume = 0;
+        fanNoise.volume = 0;
         foxyJumpscareNoise.play();
         setTimeout(() => {
           window.location.href = "/";
