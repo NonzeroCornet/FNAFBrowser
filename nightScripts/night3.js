@@ -419,4 +419,8 @@ document.body.onload = () => {
   $("body").on("contextmenu", function (e) {
     return false;
   });
+
+  $("body").on("keydown", function (e) {
+    e.preventDefault();
+  });
 };
