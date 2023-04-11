@@ -16,10 +16,8 @@ var mapPositions = {
 };
 
 var halCanOpen = false;
-var foxCanSpawn = false;
 
 var halTimeOut;
-var foxTimeOut;
 
 var jimmyDifficulty = 3;
 var halDifficulty = 2;
@@ -277,8 +275,6 @@ function toggleMap(oo) {
         }
       }, 3000);
     }
-    leftDoorBad.style.opacity = 0;
-    clearTimeout(foxTimeOut);
   } else {
     if (Math.round(Math.random() * 100) == 0) {
       lorePoster.style.opacity = 1;
@@ -288,21 +284,6 @@ function toggleMap(oo) {
     monitorOffNoise.play();
     map.style.display = "none";
     mapBad.style.display = "none";
-  }
-  if (foxCanSpawn) {
-    foxCanSpawn = false;
-    leftDoorBad.style.opacity = 1;
-    foxTimeOut = setTimeout(() => {
-      if (leftDoorBad.style.opacity == 1) {
-        document.getElementById("jumpscare3").style.display = "block";
-        sirenNoise.volume = 0;
-        fanNoise.volume = 0;
-        foxyJumpscareNoise.play();
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 3000);
-      }
-    }, 3000);
   }
 }
 
@@ -397,18 +378,25 @@ function halHubert() {
   );
 }
 
-function theFox() {
-  foxCanSpawn = true;
-  setTimeout(
-    theFox,
-    (Math.random() * 12500 + 2500) / (foxDifficulty / 4 + time)
-  );
-}
-
 setTimeout(() => {
   spookyNoises();
   setTimeout(halHubert, Math.round(Math.random() * 5000));
-  setTimeout(theFox, Math.round(Math.random() * 5000));
+  setInterval(() => {
+    if (leftDoorBad.style.opacity < 1) {
+      leftDoorBad.style.opacity =
+        Number(leftDoorBad.style.opacity) + 0.002 * (foxDifficulty / 4 + time);
+    } else if (map.style.display == "none") {
+      document.getElementById("jumpscare3").style.display = "block";
+      sirenNoise.volume = 0;
+      fanNoise.volume = 0;
+      foxyJumpscareNoise.play();
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
+    } else {
+      leftDoorBad.style.opacity = 0;
+    }
+  }, 10);
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
