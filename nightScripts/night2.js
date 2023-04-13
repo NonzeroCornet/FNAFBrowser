@@ -28,6 +28,11 @@ var doorClosing = document.querySelectorAll("img")[2];
 var doorClosed = document.querySelectorAll("img")[3];
 var phone = document.querySelectorAll("img")[6];
 var lorePoster = document.querySelectorAll("img")[7];
+lorePoster.onclick = () => {
+  if (lorePoster.style.opacity == "1") {
+    window.location.href = "/nightHTMLs/secret.html";
+  }
+};
 var clock = document.querySelectorAll("img")[8];
 var mailBad = document.querySelectorAll("img")[4];
 var map = document.querySelectorAll("img")[9];
@@ -273,7 +278,7 @@ function toggleMap(oo) {
       }, 3000);
     }
   } else {
-    if (Math.round(Math.random() * 100) == 0) {
+    if (Math.round(Math.random() * 1000) == 0) {
       lorePoster.style.opacity = 1;
     }
 
