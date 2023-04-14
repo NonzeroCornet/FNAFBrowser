@@ -52,6 +52,7 @@ var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
 var foxyJumpscareNoise = new Audio("/assets/sounds/foxyJumpscare.mp3");
+var heartBeatNoise = new Audio("/assets/sounds/heartbeat.mp3");
 var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
 nightStartNoise.volume = 0.25;
 var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
@@ -390,7 +391,12 @@ setTimeout(() => {
     if (leftDoorBad.style.opacity < 1) {
       leftDoorBad.style.opacity =
         Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
+      if (leftDoorBad.style.opacity > 0.96) {
+        heartBeatNoise.currentTime = 0;
+        heartBeatNoise.play();
+      }
     } else if (map.style.display == "none") {
+      heartBeatNoise.pause();
       document.getElementById("jumpscare3").style.display = "block";
       sirenNoise.volume = 0;
       fanNoise.volume = 0;
@@ -399,6 +405,7 @@ setTimeout(() => {
         window.location.href = "/";
       }, 3000);
     } else {
+      heartBeatNoise.pause();
       leftDoorBad.style.opacity = 0;
     }
   }, 100);
