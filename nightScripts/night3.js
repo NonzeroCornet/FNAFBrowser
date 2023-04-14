@@ -392,6 +392,7 @@ setTimeout(() => {
       leftDoorBad.style.opacity =
         Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
       if (leftDoorBad.style.opacity > 0.96) {
+        fanNoise.volume = 0;
         heartBeatNoise.currentTime = 0;
         heartBeatNoise.play();
       }
@@ -406,6 +407,7 @@ setTimeout(() => {
       }, 3000);
     } else {
       heartBeatNoise.pause();
+      fanNoise.volume = 1;
       leftDoorBad.style.opacity = 0;
     }
   }, 100);
