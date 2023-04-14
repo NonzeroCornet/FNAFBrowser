@@ -391,7 +391,7 @@ setTimeout(() => {
     if (leftDoorBad.style.opacity < 1) {
       leftDoorBad.style.opacity =
         Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
-      if (leftDoorBad.style.opacity > 0.96) {
+      if (leftDoorBad.style.opacity > 1 - (0.02 * (foxDifficulty / 4 + time) * 10)) {
         fanNoise.volume = 0;
         heartBeatNoise.currentTime = 0;
         heartBeatNoise.play();
