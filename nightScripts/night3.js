@@ -20,7 +20,7 @@ var halCanOpen = false;
 var halTimeOut;
 
 var jimmyDifficulty = 3;
-var halDifficulty = 2;
+var halDifficulty = 1;
 var foxDifficulty = 1;
 
 var emptyDoorLight = document.querySelectorAll("img")[0];
@@ -389,7 +389,7 @@ setTimeout(() => {
   setInterval(() => {
     if (leftDoorBad.style.opacity < 1) {
       leftDoorBad.style.opacity =
-        Number(leftDoorBad.style.opacity) + 0.002 * (foxDifficulty / 4 + time);
+        Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
     } else if (map.style.display == "none") {
       document.getElementById("jumpscare3").style.display = "block";
       sirenNoise.volume = 0;
@@ -401,7 +401,7 @@ setTimeout(() => {
     } else {
       leftDoorBad.style.opacity = 0;
     }
-  }, 10);
+  }, 100);
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
