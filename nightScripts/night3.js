@@ -421,8 +421,8 @@ function theFox() {
 
 setTimeout(() => {
   spookyNoises();
-  setTimeout(halHubert, Math.round(Math.random() * 5000));
-  theFox();
+  setTimeout(halHubert, (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200);
+  setTimeout(theFox, (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200);
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
