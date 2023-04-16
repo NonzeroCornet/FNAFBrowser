@@ -405,7 +405,8 @@ function theFox() {
     setTimeout(() => {
       window.location.href = "/";
     }, 3000);
-  } else {
+  }
+  if(map.style.display == "block" && leftDoorBad.style.opacity > 0.8) {
     heartBeatNoise.pause();
     fanNoise.volume = 1;
     leftDoorBad.style.opacity = 0;
