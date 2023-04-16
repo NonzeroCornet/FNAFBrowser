@@ -376,7 +376,7 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
   );
 }
 

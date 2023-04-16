@@ -380,37 +380,44 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
   );
+}
+
+var theFoxIsComing = false;
+
+function theFox() {
+  if(theFoxIsComing) {
+  if (leftDoorBad.style.opacity < 1) {
+    leftDoorBad.style.opacity =
+      Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
+    if (leftDoorBad.style.opacity > 1 - (0.02 * (foxDifficulty / 4 + time) * 10)) {
+      fanNoise.volume = 0;
+      heartBeatNoise.currentTime = 0;
+      heartBeatNoise.play();
+    }
+  } else if (map.style.display == "none") {
+    heartBeatNoise.pause();
+    document.getElementById("jumpscare3").style.display = "block";
+    sirenNoise.volume = 0;
+    fanNoise.volume = 0;
+    foxyJumpscareNoise.play();
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 3000);
+  } else {
+    heartBeatNoise.pause();
+    fanNoise.volume = 1;
+    leftDoorBad.style.opacity = 0;
+  }
+}
+  setTimeout(theFox, 100);
 }
 
 setTimeout(() => {
   spookyNoises();
   setTimeout(halHubert, Math.round(Math.random() * 5000));
-  setInterval(() => {
-    if (leftDoorBad.style.opacity < 1) {
-      leftDoorBad.style.opacity =
-        Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
-      if (leftDoorBad.style.opacity > 1 - (0.02 * (foxDifficulty / 4 + time) * 10)) {
-        fanNoise.volume = 0;
-        heartBeatNoise.currentTime = 0;
-        heartBeatNoise.play();
-      }
-    } else if (map.style.display == "none") {
-      heartBeatNoise.pause();
-      document.getElementById("jumpscare3").style.display = "block";
-      sirenNoise.volume = 0;
-      fanNoise.volume = 0;
-      foxyJumpscareNoise.play();
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 3000);
-    } else {
-      heartBeatNoise.pause();
-      fanNoise.volume = 1;
-      leftDoorBad.style.opacity = 0;
-    }
-  }, 100);
+  theFox();
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
