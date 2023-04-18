@@ -301,7 +301,6 @@ function toggleMap(oo) {
       }, 3000);
     }
   } else {
-    clearTimeout(hootyTimer);
     document.getElementById("owlTrip").style.display = "none";
     if (Math.round(Math.random() * 1000) == 0) {
       lorePoster.style.opacity = 1;
