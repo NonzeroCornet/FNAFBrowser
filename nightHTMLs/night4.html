@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="../assets/images/favicon.png" />
+    <title>FNAJ</title>
+  </head>
+
+  <body oncontextmenu="return false;">
+    <div class="game">
+      <button
+        class="wallbtn"
+        style="top: 189px; left: 938px"
+        onclick="closeDoor(this)"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 251px; left: 938px"
+        onclick="activateLight(this)"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 205px; left: 406px"
+        onclick="closeMail()"
+      ></button>
+      <img
+        class="bad"
+        style="left: 704px; width: 233px; filter: brightness(85%)"
+        src="../assets/images/doorlightempty.png"
+      />
+      <img
+        class="bad"
+        style="left: 704px; width: 233px; filter: brightness(85%)"
+        src="../assets/images/doorlightbad.png"
+      />
+      <img
+        class="bad"
+        style="left: 749px; top: 109px; width: 156px; filter: brightness(89%)"
+        src="../assets/images/doorclosing.png"
+      />
+      <img
+        class="bad"
+        style="left: 749px; width: 158px; filter: brightness(79%)"
+        src="../assets/images/doorclosed.png"
+      />
+      <img
+        class="bad"
+        style="left: 336px; top: 265px; width: 169px; filter: brightness(83%)"
+        src="../assets/images/mailbad.png"
+      />
+      <img
+        class="bad"
+        style="left: 0px; width: 97.5px; filter: brightness(89%)"
+        src="../assets/images/leftdoorbad.png"
+      />
+      <img
+        class="phone"
+        style="left: 86px; top: 142px; width: 83px; filter: brightness(79%)"
+        src="../assets/images/phonecalling.png"
+      />
+      <img
+        class="bad"
+        style="
+          left: 187px;
+          top: 172px;
+          width: 94px;
+          filter: brightness(40%);
+          pointer-events: all;
+        "
+        src="../assets/images/LorePoster.png"
+      />
+      <img
+        class="bad"
+        style="left: 547px; top: 125px; width: 109px; filter: brightness(86%)"
+        src="../assets/images/1_30am.png"
+      />
+      <button
+        class="wallbtn"
+        style="top: 212px; left: 111px; height: 75px"
+        onclick="pickupPhone(this)"
+      ></button>
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        src="../assets/images/map.png"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+          clip-path: circle(0% at 0% 0%);
+        "
+        src="../assets/images/mapDanger.png"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="owlTrip"
+        src="../assets/images/owl1.png"
+      />
+      <img
+        style="
+          position: absolute;
+          left: 0px;
+          bottom: 0px;
+          width: 1000px;
+          opacity: 0.5;
+          height: 100px;
+          pointer-events: all;
+        "
+        src="../assets/images/mdsActivationBtn.png"
+        onmouseover="toggleMap(true)"
+        onmouseleave="toggleMap(false)"
+      />
+      <img
+        style="position: absolute; left: 0px; top: 0px; width: 1000px"
+        id="beginNight2"
+        src="../assets/images/beginNight4.png"
+      />
+      <img
+        style="
+          display: none;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="endNight"
+        src="../assets/images/endNight.gif"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="jumpscare1"
+        src="../assets/images/jumpscare1.png"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="jumpscare2"
+        src="../assets/images/jumpscare2.png"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="jumpscare3"
+        src="../assets/images/jumpscare3.png"
+      />
+      <img
+        style="
+          position: absolute;
+          display: none;
+          left: 0px;
+          top: 0px;
+          width: 1000px;
+        "
+        id="jumpscare4"
+        src="../assets/images/owl2.png"
+      />
+    </div>
+    <script src="../jquery.min.js"></script>
+    <script src="../nightScripts/night4.js"></script>
+  </body>
+</html>

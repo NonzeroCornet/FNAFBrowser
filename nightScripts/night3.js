@@ -154,7 +154,7 @@ setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = "/nightHTMLs/night4.html";
         }, 10000);
         clearInterval(clockCycle);
       }, 4000);
