@@ -20,7 +20,7 @@ var halCanOpen = false;
 var halTimeOut;
 
 var jimmyDifficulty = 3;
-var halDifficulty = 2;
+var halDifficulty = 1;
 var foxDifficulty = 1;
 
 var emptyDoorLight = document.querySelectorAll("img")[0];
@@ -52,6 +52,7 @@ var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
 var foxyJumpscareNoise = new Audio("/assets/sounds/foxyJumpscare.mp3");
+var heartBeatNoise = new Audio("/assets/sounds/heartbeat.mp3");
 var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
 nightStartNoise.volume = 0.25;
 var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
@@ -379,18 +380,24 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
   );
 }
 
-setTimeout(() => {
-  spookyNoises();
-  setTimeout(halHubert, Math.round(Math.random() * 5000));
-  setInterval(() => {
+var theFoxIsComing = true;
+
+function theFox() {
+  if(theFoxIsComing) {
     if (leftDoorBad.style.opacity < 1) {
       leftDoorBad.style.opacity =
-        Number(leftDoorBad.style.opacity) + 0.002 * (foxDifficulty / 4 + time);
+        Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
+      if (leftDoorBad.style.opacity > 1 - (0.02 * (foxDifficulty / 4 + time) * 10)) {
+        fanNoise.volume = 0;
+        heartBeatNoise.currentTime = 0;
+        heartBeatNoise.play();
+      }
     } else if (map.style.display == "none") {
+      heartBeatNoise.pause();
       document.getElementById("jumpscare3").style.display = "block";
       sirenNoise.volume = 0;
       fanNoise.volume = 0;
@@ -398,10 +405,24 @@ setTimeout(() => {
       setTimeout(() => {
         window.location.href = "/";
       }, 3000);
-    } else {
-      leftDoorBad.style.opacity = 0;
     }
-  }, 10);
+    if(map.style.display == "block" && leftDoorBad.style.opacity > 0.8) {
+      heartBeatNoise.pause();
+      fanNoise.volume = 1;
+      leftDoorBad.style.opacity = 0;
+      theFoxIsComing = false;
+      setTimeout(() => {
+        theFoxIsComing = true;
+      }, (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200);
+    }
+  }
+  setTimeout(theFox, 100);
+}
+
+setTimeout(() => {
+  spookyNoises();
+  setTimeout(halHubert, (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200);
+  setTimeout(theFox, (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200);
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {

@@ -28,14 +28,11 @@
 
 <body oncontextmenu="return false;">
   <div>
-    <img
-      src="/assets/images/playButton.png"
-      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night1.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night1.html'"
-    /><br />
-    <h2>Created by Brian Dean Ullery<br />v0.0.61</h2>
+    <img src="/assets/images/playButton.png"
+      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night1.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night1.html'" /><br />
+    <h2>Created by Brian Dean Ullery<br />v0.0.68</h2>
   </div>
-  <iframe
-    style="
+  <iframe style="
       display: none;
       position: absolute;
       left: 0px;
@@ -44,8 +41,7 @@
       height: 100vh;
       border: none;
       background: black;
-    "
-  ></iframe>
+    "></iframe>
   <script src="../jquery.min.js"></script>
   <script>
     var sequence = 0;

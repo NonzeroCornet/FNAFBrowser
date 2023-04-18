@@ -376,13 +376,13 @@ function halHubert() {
   halCanOpen = true;
   setTimeout(
     halHubert,
-    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
   );
 }
 
 setTimeout(() => {
   spookyNoises();
-  setTimeout(halHubert, Math.round(Math.random() * 5000));
+  setTimeout(halHubert, (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200);
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
