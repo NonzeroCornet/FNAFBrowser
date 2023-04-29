@@ -155,7 +155,7 @@ setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = "/nightHTMLs/night5.html";
         }, 10000);
         clearInterval(clockCycle);
       }, 4000);
@@ -276,7 +276,7 @@ function toggleMap(oo) {
             sirenNoise.volume = 0;
             jumpscareNoise.play();
             setTimeout(() => {
-              window.location.href = "/nightHTMLs/night5.html";
+              window.location.href = "/";
             }, 3000);
           }
         }, 1000);
