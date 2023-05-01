@@ -18,7 +18,17 @@ var mapPositions = {
   storage: "circle(7.6% at 12% 72%)",
 };
 
-var jimmyDifficulty = 1;
+var halCanOpen = false;
+
+var halTimeOut;
+
+let params = new URL(document.location).searchParams;
+
+var jimmyDifficulty = Number(params.get("jimmy"));
+var halDifficulty = Number(params.get("hal"));
+var foxDifficulty = Number(params.get("fox"));
+var hootyDifficulty = Number(params.get("hooty"));
+var sylviaDifficulty = Number(params.get("sylvia"));
 
 var emptyDoorLight = document.querySelectorAll("img")[0];
 var badDoorLight = document.querySelectorAll("img")[1];
@@ -35,9 +45,8 @@ var clock = document.querySelectorAll("img")[8];
 var mailBad = document.querySelectorAll("img")[4];
 var map = document.querySelectorAll("img")[9];
 var mapBad = document.querySelectorAll("img")[10];
+var leftDoorBad = document.querySelectorAll("img")[5];
 
-var ringingNoise = new Audio("/assets/sounds/ring.wav");
-ringingNoise.loop = true;
 var buzzingNoise = new Audio("/assets/sounds/buzz.mp3");
 buzzingNoise.loop = true;
 var fanNoise = new Audio("/assets/sounds/fan.mp3");
@@ -45,10 +54,9 @@ fanNoise.loop = true;
 var doorOpenNoise = new Audio("/assets/sounds/doorOpen.mp3");
 var doorCloseNoise = new Audio("/assets/sounds/doorClose.mp3");
 var monitorOnNoise = new Audio("/assets/sounds/monitoron.mp3");
-monitorOnNoise.volume = 0;
 var monitorOffNoise = new Audio("/assets/sounds/monitoroff.mp3");
-monitorOffNoise.volume = 0;
 var jumpscareNoise = new Audio("/assets/sounds/jumpscare.mp3");
+var foxyJumpscareNoise = new Audio("/assets/sounds/foxyJumpscare.mp3");
 var nightStartNoise = new Audio("/assets/sounds/nightStart.mp3");
 nightStartNoise.volume = 0.25;
 var nightEndNoise = new Audio("/assets/sounds/nightEnd.mp3");
@@ -56,6 +64,9 @@ nightEndNoise.volume = 0.25;
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
+
+monitorOffNoise.volume = 0;
+monitorOnNoise.volume = 0;
 
 var doorUseTime = 0;
 var lightUseTime = 0;
@@ -133,16 +144,16 @@ nightStartNoise.play();
 setTimeout(() => {
   monitorOffNoise.volume = 1;
   monitorOnNoise.volume = 1;
-  beginNight1.style.display = "none";
-  ringingNoise.volume = 0.4;
-  ringingNoise.play();
+  document.getElementById("beginNight2").style.display = "none";
   fanNoise.play();
   sirenNoise.play();
   clockCycle = setInterval(() => {
     clock.style.opacity = 1;
     time += 1;
     if (time == 1) {
-      setTimeout(jimmyDean, Math.random() * 10000);
+      if (jimmyDifficulty != 0) {
+        setTimeout(jimmyDean, Math.random() * 10000);
+      }
     } else if (time == 2) {
       clock.src = "/assets/images/3am.png";
     } else if (time == 3) {
@@ -152,16 +163,24 @@ setTimeout(() => {
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
-        document.cookie = "night = 2; expires=Tue, 19 Jan 2038 04:14:07 GMT";
         setTimeout(() => {
-          window.location.href = "/nightHTMLs/night2.html";
+          if (
+            jimmyDifficulty == 20 &&
+            halDifficulty == 20 &&
+            foxDifficulty == 20 &&
+            hootyDifficulty == 20 &&
+            sylviaDifficulty == 20
+          ) {
+            window.location.href = "/nightHTMLs/credits.html";
+          } else {
+            window.location.href = "/";
+          }
         }, 10000);
         clearInterval(clockCycle);
       }, 4000);
     }
   }, 133750);
   setTimeout(() => {
-    ringingNoise.pause();
     phone.style.opacity = 0;
     document.querySelectorAll("button")[3].style.display = "none";
   }, 15000);
@@ -219,15 +238,19 @@ function closeDoor(btn) {
 }
 
 function pickupPhone(btn) {
-  let call = new Audio("/assets/sounds/night1.wav");
+  let call = new Audio("/assets/sounds/night4.mp3");
   call.play();
-  ringingNoise.pause();
   phone.style.opacity = 0;
   btn.style.display = "none";
 }
 
 function closeMail() {
+  if (mailBad.style.opacity == 1) {
+    let closeSound = new Audio("/assets/sounds/mailClosing.mp3");
+    closeSound.play();
+  }
   mailBad.style.opacity = 0;
+  clearTimeout(halTimeOut);
 }
 
 function blinkDoorLight() {
@@ -252,19 +275,57 @@ function blinkDoorLight() {
 }
 blinkDoorLight();
 
+var hootyOn = false;
+
 function toggleMap(oo) {
   if (oo) {
     lorePoster.style.opacity = 0;
     monitorOnNoise.currentTime = 0;
     monitorOnNoise.play();
+    if (
+      Math.round(Math.random() * 200) <= hootyDifficulty &&
+      hootyDifficulty != 0
+    ) {
+      document.getElementById("owlTrip").style.display = "block";
+      if (!hootyOn) {
+        hootyOn = true;
+        setTimeout(() => {
+          hootyOn = false;
+          if (map.style.display == "block") {
+            document.getElementById("jumpscare4").style.display = "block";
+            sirenNoise.volume = 0;
+            jumpscareNoise.play();
+            setTimeout(() => {
+              window.location.href = "/nightHTMLs/night5.html";
+            }, 3000);
+          }
+        }, 1000);
+      }
+    }
     map.style.display = "block";
     if (!hideJimmy) {
       mapBad.style.display = "block";
     }
+    if (halCanOpen) {
+      halCanOpen = false;
+      mailBad.style.opacity = 1;
+      halTimeOut = setTimeout(() => {
+        if (mailBad.style.opacity == 1) {
+          document.getElementById("jumpscare2").style.display = "block";
+          sirenNoise.volume = 0;
+          jumpscareNoise.play();
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000);
+        }
+      }, 3000);
+    }
   } else {
+    document.getElementById("owlTrip").style.display = "none";
     if (Math.round(Math.random() * 1000) == 0) {
       lorePoster.style.opacity = 1;
     }
+
     monitorOffNoise.currentTime = 0;
     monitorOffNoise.play();
     map.style.display = "none";
@@ -308,6 +369,14 @@ function jimmyDean() {
       mapBad.style.clipPath = "circle(0% at 0% 0%)";
       atDoor2 = false;
       break;
+  }
+  mapBad.style.filter = "hue-rotate(0deg);";
+  if (
+    Math.round(Math.random() * 200) <= sylviaDifficulty &&
+    sylviaDifficulty != 0
+  ) {
+    mapBad.clipPath = "clip-path: circle(100% at 50% 50%);";
+    mapBad.style.filter = "hue-rotate(275deg);";
   }
   hideJimmy = false;
   if (map.style.display == "block") {
@@ -354,7 +423,41 @@ function spookyNoises() {
   noise.play();
   setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 30000));
 }
-setTimeout(spookyNoises, Math.round(Math.random() * 10000) + 118000);
+
+function halHubert() {
+  halCanOpen = true;
+  setTimeout(
+    halHubert,
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 3200
+  );
+}
+
+setTimeout(() => {
+  spookyNoises();
+  if (halDifficulty != 0) {
+    setTimeout(halHubert, Math.round(Math.random() * 5000));
+  }
+
+  setInterval(() => {
+    if (leftDoorBad.style.opacity < 1) {
+      if (foxDifficulty != 0) {
+        leftDoorBad.style.opacity =
+          Number(leftDoorBad.style.opacity) +
+          0.002 * (foxDifficulty / 4 + time);
+      }
+    } else if (map.style.display == "none") {
+      document.getElementById("jumpscare3").style.display = "block";
+      sirenNoise.volume = 0;
+      fanNoise.volume = 0;
+      foxyJumpscareNoise.play();
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
+    } else {
+      leftDoorBad.style.opacity = 0;
+    }
+  }, 10);
+}, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {
   $("img").mousedown(function (e) {

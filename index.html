@@ -16,23 +16,49 @@
 
   div {
     position: absolute;
-    left: 100px;
-    top: 200px;
-    cursor: pointer;
+    left: 43.4vw;
+    top: 34vh;
   }
 
   img {
-    width: 200px;
+    width: 15vw;
+    cursor: pointer;
   }
 </style>
 
 <body oncontextmenu="return false;">
   <div>
-    <img src="/assets/images/playButton.png"
-      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night1.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night1.html'" /><br />
-    <h2>Created by Brian Dean Ullery<br />v0.0.75</h2>
+    <img
+      src="/assets/images/playButton.png"
+      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+window.getCookie('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+window.getCookie('night')+'.html'"
+    /><br />
+    <img
+      src="/assets/images/resetButton.png"
+      onclick="document.cookie = 'night = 1; expires=Tue, 19 Jan 2038 04:14:07 GMT'; window.location.reload();"
+    /><br />
+    <h2 style="text-align: center; margin-left: -55px">
+      Created by Brian Dean Ullery<br />v1.0.0
+    </h2>
+    <button
+      style="
+        position: fixed;
+        top: 9px;
+        right: 16px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        opacity: 0.7;
+        color: white;
+        font-size: 20px;
+      "
+      onclick="if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}"
+    >
+      &#x26F6;
+    </button>
   </div>
-  <iframe style="
+  <iframe
+    style="
       display: none;
       position: absolute;
       left: 0px;
@@ -41,46 +67,19 @@
       height: 100vh;
       border: none;
       background: black;
-    "></iframe>
+    "
+  ></iframe>
   <script src="../jquery.min.js"></script>
   <script>
-    var sequence = 0;
-    function cheatCode() {
-      window.location !== window.parent.location
-        ? (window.location.href = "/nightHTMLs/night1.html")
-        : (document.getElementsByTagName("iframe")[0].style.display = "block");
-      document.getElementsByTagName("iframe")[0].src =
-        "/nightHTMLs/night4.html";
+    window.getCookie = function (name) {
+      var match = document.cookie.match(
+        new RegExp("(^| )" + name + "=([^;]+)")
+      );
+      if (match) return match[2];
+    };
+
+    if (!window.getCookie("night")) {
+      document.cookie = "night = 1; expires=Tue, 19 Jan 2038 04:14:07 GMT";
     }
-    window.addEventListener("keydown", (event) => {
-      switch (sequence) {
-        case 0:
-          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
-          break;
-        case 1:
-          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
-          break;
-        case 2:
-          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
-          break;
-        case 3:
-          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
-          break;
-        case 4:
-          event.key == "ArrowUp" ? sequence++ : (sequence = 0);
-          break;
-        case 5:
-          event.key == "ArrowLeft" ? sequence++ : (sequence = 0);
-          break;
-        case 6:
-          event.key == "ArrowDown" ? sequence++ : (sequence = 0);
-          break;
-        case 7:
-          event.key == "ArrowRight" ? cheatCode() : (sequence = 0);
-          break;
-        default:
-          break;
-      }
-    });
   </script>
 </body>

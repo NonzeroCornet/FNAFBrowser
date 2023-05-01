@@ -1,3 +1,6 @@
+if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+  window.location.href = "https://fnaj.jdbdu.org/";
+
 var atDoor2 = false;
 var door2Closed = false;
 var time = 0;
@@ -58,6 +61,9 @@ nightEndNoise.volume = 0.25;
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
+
+monitorOffNoise.volume = 0;
+monitorOnNoise.volume = 0;
 
 var doorUseTime = 0;
 var lightUseTime = 0;
@@ -133,6 +139,8 @@ setInterval(() => {
 
 nightStartNoise.play();
 setTimeout(() => {
+  monitorOffNoise.volume = 1;
+  monitorOnNoise.volume = 1;
   document.getElementById("beginNight2").style.display = "none";
   fanNoise.play();
   sirenNoise.play();
@@ -150,6 +158,7 @@ setTimeout(() => {
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
+        document.cookie = "night = 6; expires=Tue, 19 Jan 2038 04:14:07 GMT";
         setTimeout(() => {
           window.location.href = "/";
         }, 10000);

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="../assets/images/favicon.png" />
+    <title>FNAJ</title>
+    <style>
+      @font-face {
+        font-family: darkStarNumbers;
+        src: url(../assets/DarkStarNumbers.ttf);
+      }
+      body {
+        font-family: darkStarNumbers;
+      }
+
+      h1 {
+        position: absolute;
+        text-align: center;
+        width: 50px;
+        color: red;
+        -webkit-text-stroke: 2px black;
+      }
+    </style>
+  </head>
+
+  <body oncontextmenu="return false;">
+    <div
+      class="game"
+      style="
+        background: url(../assets/images/customnight.png) no-repeat center
+          center;
+        background-size: contain;
+      "
+    >
+      <h1 style="margin-left: 120px; top: 400px">0</h1>
+      <h1 style="margin-left: 290px; top: 400px">0</h1>
+      <h1 style="margin-left: 475px; top: 400px">0</h1>
+      <h1 style="margin-left: 660px; top: 400px">0</h1>
+      <h1 style="margin-left: 830px; top: 400px">0</h1>
+      <button
+        class="wallbtn"
+        style="top: 304px; left: 123px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[0].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[0].innerHTML)+1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 350px; left: 123px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[0].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[0].innerHTML)-1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 304px; left: 292px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[1].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[1].innerHTML)+1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 350px; left: 292px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[1].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[1].innerHTML)-1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 304px; left: 477px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[2].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[2].innerHTML)+1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 350px; left: 477px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[2].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[2].innerHTML)-1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 304px; left: 662px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[3].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[3].innerHTML)+1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 350px; left: 662px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[3].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[3].innerHTML)-1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 304px; left: 831px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[4].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[4].innerHTML)+1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 350px; left: 831px; width: 46px; height: 31px"
+        onclick="document.querySelectorAll('h1')[4].innerHTML = Math.min(20, Math.max(0, Number(document.querySelectorAll('h1')[4].innerHTML)-1));"
+      ></button>
+      <button
+        class="wallbtn"
+        style="top: 470px; left: 485px; background: red"
+        onclick="window.location.href = '/nightHTMLs/nightC.html?jimmy='+document.querySelectorAll('h1')[0].innerHTML+'&hal='+document.querySelectorAll('h1')[1].innerHTML+'&fox='+document.querySelectorAll('h1')[2].innerHTML+'&hooty='+document.querySelectorAll('h1')[3].innerHTML+'&sylvia='+document.querySelectorAll('h1')[4].innerHTML"
+      ></button>
+    </div>
+    <script src="../jquery.min.js"></script>
+    <script>
+      if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+        window.location.href = "https://fnaj.jdbdu.org/";
+
+      $(document).ready(function () {
+        var width = document.getElementsByClassName("game")[0].offsetWidth;
+        var height = document.getElementsByClassName("game")[0].offsetHeight;
+        var windowWidth = $(document).outerWidth();
+        var windowHeight = $(document).outerHeight();
+        var r = 1;
+        r = Math.min(windowWidth / width, windowHeight / height);
+
+        $(".game").css({
+          "-webkit-transform": "scale(" + r + ")",
+          "-moz-transform": "scale(" + r + ")",
+          "-ms-transform": "scale(" + r + ")",
+          "-o-transform": "scale(" + r + ")",
+          transform: "scale(" + r + ")",
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        var width = document.getElementsByClassName("game")[0].offsetWidth;
+        var height = document.getElementsByClassName("game")[0].offsetHeight;
+        var windowWidth = $(document).outerWidth();
+        var windowHeight = $(document).outerHeight();
+        var r = 1;
+        r = Math.min(windowWidth / width, windowHeight / height);
+
+        $(".game").css({
+          "-webkit-transform": "scale(" + r + ")",
+          "-moz-transform": "scale(" + r + ")",
+          "-ms-transform": "scale(" + r + ")",
+          "-o-transform": "scale(" + r + ")",
+          transform: "scale(" + r + ")",
+        });
+      });
+    </script>
+  </body>
+</html>

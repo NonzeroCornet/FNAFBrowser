@@ -1,3 +1,6 @@
+if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+  window.location.href = "https://fnaj.jdbdu.org/";
+
 var atDoor2 = false;
 var door2Closed = false;
 var time = 0;
@@ -60,6 +63,9 @@ nightEndNoise.volume = 0.25;
 var sirenNoise = new Audio("/assets/sounds/Siren.mp3");
 sirenNoise.loop = true;
 sirenNoise.volume = 0;
+
+monitorOffNoise.volume = 0;
+monitorOnNoise.volume = 0;
 
 var doorUseTime = 0;
 var lightUseTime = 0;
@@ -135,6 +141,8 @@ setInterval(() => {
 
 nightStartNoise.play();
 setTimeout(() => {
+  monitorOffNoise.volume = 1;
+  monitorOnNoise.volume = 1;
   document.getElementById("beginNight2").style.display = "none";
   ringingNoise.volume = 0.4;
   ringingNoise.play();
@@ -154,6 +162,7 @@ setTimeout(() => {
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
+        document.cookie = "night = 4; expires=Tue, 19 Jan 2038 04:14:07 GMT";
         setTimeout(() => {
           window.location.href = "/nightHTMLs/night4.html";
         }, 10000);
@@ -387,11 +396,14 @@ function halHubert() {
 var theFoxIsComing = true;
 
 function theFox() {
-  if(theFoxIsComing) {
+  if (theFoxIsComing) {
     if (leftDoorBad.style.opacity < 1) {
       leftDoorBad.style.opacity =
         Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
-      if (leftDoorBad.style.opacity > 1 - (0.02 * (foxDifficulty / 4 + time) * 10)) {
+      if (
+        leftDoorBad.style.opacity >
+        1 - 0.02 * (foxDifficulty / 4 + time) * 10
+      ) {
         fanNoise.volume = 0;
         heartBeatNoise.currentTime = 0;
         heartBeatNoise.play();
@@ -406,7 +418,7 @@ function theFox() {
         window.location.href = "/";
       }, 3000);
     }
-    if(map.style.display == "block" && leftDoorBad.style.opacity > 0.8) {
+    if (map.style.display == "block" && leftDoorBad.style.opacity > 0.8) {
       heartBeatNoise.pause();
       fanNoise.volume = 1;
       leftDoorBad.style.opacity = 0;
@@ -421,8 +433,14 @@ function theFox() {
 
 setTimeout(() => {
   spookyNoises();
-  setTimeout(halHubert, (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200);
-  setTimeout(theFox, (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200);
+  setTimeout(
+    halHubert,
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
+  );
+  setTimeout(
+    theFox,
+    (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
+  );
 }, Math.round(Math.random() * 10000) + 118000);
 
 document.body.onload = () => {

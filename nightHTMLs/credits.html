@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="../assets/images/favicon.png" />
+    <title>FNAJ</title>
+  </head>
+
+  <body oncontextmenu="return false;">
+    <div class="game" style="background: black">
+      <video
+        src="../assets/LOOOOOOOOORRRRRREEEEEEEEEEe.mp4"
+        width="100%"
+      ></video>
+      <img
+        src="../assets/images/credits2.png"
+        style="opacity: 0%; width: 100%; transition: opacity 2s"
+      />
+    </div>
+    <script src="../jquery.min.js"></script>
+    <script>
+      if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+        window.location.href = "https://fnaj.jdbdu.org/";
+
+      var width = document.getElementsByClassName("game")[0].offsetWidth;
+      var height = document.getElementsByClassName("game")[0].offsetHeight;
+      var windowWidth = $(document).outerWidth();
+      var windowHeight = $(document).outerHeight();
+      var r = 1;
+      r = Math.min(windowWidth / width, windowHeight / height);
+
+      $(".game").css({
+        "-webkit-transform": "scale(" + r + ")",
+        "-moz-transform": "scale(" + r + ")",
+        "-ms-transform": "scale(" + r + ")",
+        "-o-transform": "scale(" + r + ")",
+        transform: "scale(" + r + ")",
+      });
+      window.addEventListener("resize", () => {
+        var width = document.getElementsByClassName("game")[0].offsetWidth;
+        var height = document.getElementsByClassName("game")[0].offsetHeight;
+        var windowWidth = $(document).outerWidth();
+        var windowHeight = $(document).outerHeight();
+        var r = 1;
+        r = Math.min(windowWidth / width, windowHeight / height);
+
+        $(".game").css({
+          "-webkit-transform": "scale(" + r + ")",
+          "-moz-transform": "scale(" + r + ")",
+          "-ms-transform": "scale(" + r + ")",
+          "-o-transform": "scale(" + r + ")",
+          transform: "scale(" + r + ")",
+        });
+      });
+      document.getElementsByTagName("video")[0].play();
+      var song = new Audio("/assets/sounds/sylviaNoTears.mp3");
+      song.volume = 0.5;
+
+      setTimeout(() => {
+        document.getElementsByTagName("video")[0].style.display = "none";
+        document.getElementsByTagName("img")[0].style.opacity = "100%";
+        setTimeout(() => {
+          song.play();
+        }, 2000);
+        song.addEventListener("ended", function () {
+          window.location.href = "/";
+        });
+        setTimeout(() => {
+          document.getElementsByTagName("img")[0].style.opacity = "0%";
+          setTimeout(() => {
+            document.getElementsByTagName("img")[0].src =
+              "../assets/images/credits.png";
+            document.getElementsByTagName("img")[0].style.opacity = "100%";
+            setTimeout(() => {
+              document.getElementsByTagName("img")[0].style.opacity = "0%";
+              setTimeout(() => {
+                document.getElementsByTagName("img")[0].src =
+                  "../assets/images/credits3.png";
+                document.getElementsByTagName("img")[0].style.opacity = "100%";
+                setTimeout(() => {
+                  document.getElementsByTagName("img")[0].style.opacity = "0%";
+                  setTimeout(() => {
+                    document.getElementsByTagName("img")[0].src =
+                      "../assets/images/credits4.png";
+                    document.getElementsByTagName("img")[0].style.opacity =
+                      "100%";
+                  }, 2000);
+                }, 5000);
+              }, 2000);
+            }, 35000);
+          }, 2000);
+        }, 10000);
+      }, 5000);
+    </script>
+  </body>
+</html>
