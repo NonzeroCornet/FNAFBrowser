@@ -152,7 +152,7 @@ setTimeout(() => {
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
-        document.cookie = "night = 2; expires=Tue, 19 Jan 2038 04:14:07 GMT; SameSite=None; Secure";
+        window.parent.postMessage("2", "*");
         setTimeout(() => {
           window.location.href = "/nightHTMLs/night2.html";
         }, 10000);
