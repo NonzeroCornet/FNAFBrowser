@@ -131,6 +131,7 @@ setInterval(() => {
 
 nightStartNoise.play();
 setTimeout(() => {
+  window.parent.postMessage("1", "*");
   monitorOffNoise.volume = 1;
   monitorOnNoise.volume = 1;
   beginNight1.style.display = "none";
