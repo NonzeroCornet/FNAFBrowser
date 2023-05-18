@@ -150,6 +150,7 @@ setTimeout(() => {
       clock.src = "/assets/images/4_30am.png";
     } else if (time == 4) {
       clock.src = "/assets/images/6am.gif";
+      time++;
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
@@ -324,7 +325,7 @@ function jimmyDean() {
 }
 
 function testForDie() {
-  if (atDoor2 && !door2Closed) {
+  if (atDoor2 && !door2Closed && time != 5) {
     document.getElementById("jumpscare1").style.display = "block";
     sirenNoise.volume = 0;
     jumpscareNoise.play();

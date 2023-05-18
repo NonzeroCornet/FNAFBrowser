@@ -159,6 +159,7 @@ setTimeout(() => {
       clock.src = "/assets/images/4_30am.png";
     } else if (time == 4) {
       clock.src = "/assets/images/6am.gif";
+      time++;
       setTimeout(() => {
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
@@ -280,7 +281,7 @@ function toggleMap(oo) {
       halCanOpen = false;
       mailBad.style.opacity = 1;
       halTimeOut = setTimeout(() => {
-        if (mailBad.style.opacity == 1) {
+        if (mailBad.style.opacity == 1 && time != 5) {
           document.getElementById("jumpscare2").style.display = "block";
           sirenNoise.volume = 0;
           jumpscareNoise.play();
@@ -353,7 +354,7 @@ function jimmyDean() {
 }
 
 function testForDie() {
-  if (atDoor2 && !door2Closed) {
+  if (atDoor2 && !door2Closed && time != 5) {
     document.getElementById("jumpscare1").style.display = "block";
     sirenNoise.volume = 0;
     jumpscareNoise.play();
@@ -408,7 +409,7 @@ function theFox() {
         heartBeatNoise.currentTime = 0;
         heartBeatNoise.play();
       }
-    } else if (map.style.display == "none") {
+    } else if (map.style.display == "none" && time != 5) {
       heartBeatNoise.pause();
       document.getElementById("jumpscare3").style.display = "block";
       sirenNoise.volume = 0;
