@@ -7,38 +7,44 @@
   }
 
   body {
-    background: url(/assets/images/TitleScreen.gif) no-repeat center center,
-      black;
-    background-size: contain;
-    font-family: arcade;
-    color: yellow;
+    background: #0f0f0f;
   }
 
   div {
     position: absolute;
-    left: 43.4vw;
-    top: 34vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -281.25px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 562.5px;
+    background: url(/assets/images/TitleScreen.gif) no-repeat center center;
+    background-size: contain;
   }
 
-  img {
-    width: 15vw;
+  .btn {
+    position: absolute;
+    left: 213px;
+    width: 175px;
+    height: 62px;
+    opacity: 0;
     cursor: pointer;
   }
 </style>
 
 <body oncontextmenu="return false;">
-  <div>
-    <img
-      src="/assets/images/playButton.png"
-      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+window.getCookie('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'"
-    /><br />
-    <img
-      src="/assets/images/resetButton.png"
-      onclick="localStorage.setItem('night', event.data)"
-    /><br />
-    <h2 style="text-align: center; margin-left: -55px">
-      Created by Brian Dean Ullery<br />v1.0.0
-    </h2>
+  <div id="main">
+    <button
+      class="btn"
+      style="top: 158px"
+      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'"
+    ></button
+    ><br />
+    <button
+      class="btn"
+      style="top: 231px"
+      onclick="localStorage.setItem('night', 1)"
+    ></button>
     <button
       style="
         position: fixed;
@@ -71,8 +77,38 @@
   ></iframe>
   <script src="../jquery.min.js"></script>
   <script>
-    window.addEventListener('message', function(event) {
+    window.addEventListener("message", function (event) {
       localStorage.setItem("night", event.data);
+    });
+    var width = document.getElementById("main").offsetWidth;
+    var height = document.getElementById("main").offsetHeight;
+    var windowWidth = $(document).outerWidth();
+    var windowHeight = $(document).outerHeight();
+    var r = 1;
+    r = Math.min(windowWidth / width, windowHeight / height);
+
+    $("#main").css({
+      "-webkit-transform": "scale(" + r + ")",
+      "-moz-transform": "scale(" + r + ")",
+      "-ms-transform": "scale(" + r + ")",
+      "-o-transform": "scale(" + r + ")",
+      transform: "scale(" + r + ")",
+    });
+    window.addEventListener("resize", () => {
+      var width = document.getElementById("main").offsetWidth;
+      var height = document.getElementById("main").offsetHeight;
+      var windowWidth = $(document).outerWidth();
+      var windowHeight = $(document).outerHeight();
+      var r = 1;
+      r = Math.min(windowWidth / width, windowHeight / height);
+
+      $("#main").css({
+        "-webkit-transform": "scale(" + r + ")",
+        "-moz-transform": "scale(" + r + ")",
+        "-ms-transform": "scale(" + r + ")",
+        "-o-transform": "scale(" + r + ")",
+        transform: "scale(" + r + ")",
+      });
     });
   </script>
 </body>
