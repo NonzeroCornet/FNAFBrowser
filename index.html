@@ -47,7 +47,7 @@
     ></button>
     <button
       style="
-        position: fixed;
+        position: absolute;
         top: 9px;
         right: 16px;
         background-color: transparent;
@@ -80,6 +80,7 @@
     window.addEventListener("message", function (event) {
       localStorage.setItem("night", event.data);
     });
+document.body.onload = () => {
     var width = document.getElementById("main").offsetWidth;
     var height = document.getElementById("main").offsetHeight;
     var windowWidth = $(document).outerWidth();
@@ -94,6 +95,7 @@
       "-o-transform": "scale(" + r + ")",
       transform: "scale(" + r + ")",
     });
+}
     window.addEventListener("resize", () => {
       var width = document.getElementById("main").offsetWidth;
       var height = document.getElementById("main").offsetHeight;
