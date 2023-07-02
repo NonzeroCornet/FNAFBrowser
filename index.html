@@ -61,7 +61,7 @@
     <button
       class="btn"
       style="top: 158px"
-      onclick="window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'"
+      onclick="document.getElementById("bg").pause(); window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'"
     ></button
     ><br />
     <button
@@ -144,9 +144,7 @@
         document.getElementById("audioFullfillmentDiv").style.opacity = "0";
         document.getElementById("audioFullfillmentDiv").style.pointerEvents =
           "none";
-        setTimeout(() => {
           document.getElementById("bg").play();
-        }, 1000);
       }
     }
   </script>
