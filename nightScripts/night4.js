@@ -75,39 +75,31 @@ var hideJimmy = true;
 
 var clockCycle;
 
-$(document).ready(function () {
-  var width = document.getElementsByClassName("game")[0].offsetWidth;
-  var height = document.getElementsByClassName("game")[0].offsetHeight;
-  var windowWidth = $(document).outerWidth();
-  var windowHeight = $(document).outerHeight();
+function fit() {
+  var prevR = 0;
   var r = 1;
-  r = Math.min(windowWidth / width, windowHeight / height);
+  while (r != prevR) {
+    prevR = r;
+    var width = document.getElementById("main").offsetWidth;
+    var height = document.getElementById("main").offsetHeight;
+    var windowWidth = $(document).outerWidth();
+    var windowHeight = $(document).outerHeight();
+    var r = 1;
+    r = Math.min(windowWidth / width, windowHeight / height);
 
-  $(".game").css({
-    "-webkit-transform": "scale(" + r + ")",
-    "-moz-transform": "scale(" + r + ")",
-    "-ms-transform": "scale(" + r + ")",
-    "-o-transform": "scale(" + r + ")",
-    transform: "scale(" + r + ")",
-  });
-});
+    $("#main").css({
+      "-webkit-transform": "scale(" + r + ")",
+      "-moz-transform": "scale(" + r + ")",
+      "-ms-transform": "scale(" + r + ")",
+      "-o-transform": "scale(" + r + ")",
+      transform: "scale(" + r + ")",
+    });
+  }
+}
 
-window.addEventListener("resize", () => {
-  var width = document.getElementsByClassName("game")[0].offsetWidth;
-  var height = document.getElementsByClassName("game")[0].offsetHeight;
-  var windowWidth = $(document).outerWidth();
-  var windowHeight = $(document).outerHeight();
-  var r = 1;
-  r = Math.min(windowWidth / width, windowHeight / height);
+$(document).ready(fit);
 
-  $(".game").css({
-    "-webkit-transform": "scale(" + r + ")",
-    "-moz-transform": "scale(" + r + ")",
-    "-ms-transform": "scale(" + r + ")",
-    "-o-transform": "scale(" + r + ")",
-    transform: "scale(" + r + ")",
-  });
-});
+window.addEventListener("resize", fit);
 
 setInterval(() => {
   if (door2Closed) {

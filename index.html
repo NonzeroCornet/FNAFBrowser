@@ -1,5 +1,8 @@
 <title>FNAJ</title>
 <link rel="icon" href="/assets/images/favicon.png" />
+<audio id="bg" loop>
+  <source src="assets/sounds/bg.mp3" type="audio/mpeg" />
+</audio>
 <style>
   @font-face {
     font-family: arcade;
@@ -10,7 +13,7 @@
     background: #0f0f0f;
   }
 
-  div {
+  #main {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,6 +23,27 @@
     height: 562.5px;
     background: url(/assets/images/TitleScreen.gif) no-repeat center center;
     background-size: contain;
+  }
+
+  #audioFullfillmentDiv {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    transition: opacity 1s ease-out;
+  }
+
+  #audioFullfillmentText {
+    transition: opacity 1s ease-out;
+    font-family: arcade;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .btn {
@@ -32,7 +56,7 @@
   }
 </style>
 
-<body oncontextmenu="return false;">
+<body oncontextmenu="return false;" onload="fit(); fullfillAudioRequirements()">
   <div id="main">
     <button
       class="btn"
@@ -62,6 +86,17 @@
     >
       &#x26F6;
     </button>
+    <div
+      id="audioFullfillmentDiv"
+      onclick='document.getElementById("audioFullfillmentText").style.opacity = "0"; setTimeout(() => {this.style.opacity = "0"; this.style.pointerEvents = "none"; document.getElementById("bg").play(); }, 1000);'
+    >
+      <h1 id="audioFullfillmentText">
+        DISCLAIMER:<br />This game contains loud noises and jumpscares, albeit
+        mild one's. Discretion is advised.<br />If you would like to contact the
+        developer about suggestions, bugs, or other inquiries, please visit
+        zero.jdbdu.org.<br /><br />Press anywhere to continue
+      </h1>
+    </div>
   </div>
   <iframe
     style="
@@ -80,37 +115,39 @@
     window.addEventListener("message", function (event) {
       localStorage.setItem("night", event.data);
     });
-document.body.onload = () => {
-    var width = document.getElementById("main").offsetWidth;
-    var height = document.getElementById("main").offsetHeight;
-    var windowWidth = $(document).outerWidth();
-    var windowHeight = $(document).outerHeight();
-    var r = 1;
-    r = Math.min(windowWidth / width, windowHeight / height);
-
-    $("#main").css({
-      "-webkit-transform": "scale(" + r + ")",
-      "-moz-transform": "scale(" + r + ")",
-      "-ms-transform": "scale(" + r + ")",
-      "-o-transform": "scale(" + r + ")",
-      transform: "scale(" + r + ")",
-    });
-}
-    window.addEventListener("resize", () => {
-      var width = document.getElementById("main").offsetWidth;
-      var height = document.getElementById("main").offsetHeight;
-      var windowWidth = $(document).outerWidth();
-      var windowHeight = $(document).outerHeight();
+    function fit() {
+      var prevR = 0;
       var r = 1;
-      r = Math.min(windowWidth / width, windowHeight / height);
+      while (r != prevR) {
+        prevR = r;
+        var width = document.getElementById("main").offsetWidth;
+        var height = document.getElementById("main").offsetHeight;
+        var windowWidth = $(document).outerWidth();
+        var windowHeight = $(document).outerHeight();
+        var r = 1;
+        r = Math.min(windowWidth / width, windowHeight / height);
 
-      $("#main").css({
-        "-webkit-transform": "scale(" + r + ")",
-        "-moz-transform": "scale(" + r + ")",
-        "-ms-transform": "scale(" + r + ")",
-        "-o-transform": "scale(" + r + ")",
-        transform: "scale(" + r + ")",
-      });
-    });
+        $("#main").css({
+          "-webkit-transform": "scale(" + r + ")",
+          "-moz-transform": "scale(" + r + ")",
+          "-ms-transform": "scale(" + r + ")",
+          "-o-transform": "scale(" + r + ")",
+          transform: "scale(" + r + ")",
+        });
+      }
+    }
+    window.addEventListener("resize", fit);
+
+    function fullfillAudioRequirements() {
+      if (window.location !== window.parent.location) {
+        document.getElementById("audioFullfillmentText").style.display = "none";
+        document.getElementById("audioFullfillmentDiv").style.opacity = "0";
+        document.getElementById("audioFullfillmentDiv").style.pointerEvents =
+          "none";
+        setTimeout(() => {
+          document.getElementById("bg").play();
+        }, 1000);
+      }
+    }
   </script>
 </body>
