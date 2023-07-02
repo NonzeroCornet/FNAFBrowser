@@ -80,14 +80,14 @@ function fit() {
   var r = 1;
   while (r != prevR) {
     prevR = r;
-    var width = document.getElementById("main").offsetWidth;
-    var height = document.getElementById("main").offsetHeight;
+    var width = document.querySelector(".game").offsetWidth;
+    var height = document.querySelector(".game").offsetHeight;
     var windowWidth = $(document).outerWidth();
     var windowHeight = $(document).outerHeight();
     var r = 1;
     r = Math.min(windowWidth / width, windowHeight / height);
 
-    $("#main").css({
+    $(".game").css({
       "-webkit-transform": "scale(" + r + ")",
       "-moz-transform": "scale(" + r + ")",
       "-ms-transform": "scale(" + r + ")",
