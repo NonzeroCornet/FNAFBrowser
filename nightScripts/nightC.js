@@ -145,14 +145,16 @@ setTimeout(() => {
   document.getElementById("beginNight2").style.display = "none";
   fanNoise.play();
   sirenNoise.play();
+  if (jimmyDifficulty != 0) {
+    setTimeout(jimmyDean, Math.random() * 10000);
+  }
+  if (halDifficulty != 0) {
+    setTimeout(halHubert, Math.round(Math.random() * 5000));
+  }
   clockCycle = setInterval(() => {
     clock.style.opacity = 1;
     time += 1;
-    if (time == 1) {
-      if (jimmyDifficulty != 0) {
-        setTimeout(jimmyDean, Math.random() * 10000);
-      }
-    } else if (time == 2) {
+    if (time == 2) {
       clock.src = "/assets/images/3am.png";
     } else if (time == 3) {
       clock.src = "/assets/images/4_30am.png";
@@ -434,10 +436,6 @@ function halHubert() {
 
 setTimeout(() => {
   spookyNoises();
-  if (halDifficulty != 0) {
-    setTimeout(halHubert, Math.round(Math.random() * 5000));
-  }
-
   setInterval(() => {
     if (leftDoorBad.style.opacity < 1) {
       if (foxDifficulty != 0) {

@@ -146,12 +146,15 @@ setTimeout(() => {
   ringingNoise.play();
   fanNoise.play();
   sirenNoise.play();
+  setTimeout(jimmyDean, Math.random() * 10000);
+  setTimeout(
+    halHubert,
+    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
+  );
   clockCycle = setInterval(() => {
     clock.style.opacity = 1;
     time += 1;
-    if (time == 1) {
-      setTimeout(jimmyDean, Math.random() * 10000);
-    } else if (time == 2) {
+    if (time == 2) {
       clock.src = "/assets/images/3am.png";
     } else if (time == 3) {
       clock.src = "/assets/images/4_30am.png";
@@ -433,10 +436,6 @@ function theFox() {
 
 setTimeout(() => {
   spookyNoises();
-  setTimeout(
-    halHubert,
-    (Math.random() * 12500) / (halDifficulty / 4 + time) + 13200
-  );
   setTimeout(
     theFox,
     (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
