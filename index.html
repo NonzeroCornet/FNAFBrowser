@@ -1,160 +1,168 @@
-<title>FNAJ</title>
-<link rel="icon" href="/assets/images/favicon.png" />
-<audio id="bg" loop>
-  <source src="assets/sounds/bg.mp3" type="audio/mpeg" />
-</audio>
-<style>
-  @font-face {
-    font-family: arcade;
-    src: url(/assets/ARCADECLASSIC.TTF);
-  }
+<!DOCTYPE html>
+<html lang="en">
+  <title>Five Nights At Jimmy's</title>
+  <link rel="icon" href="/assets/images/favicon.png" />
+  <meta
+    name="description"
+    content="Five Nights At Jimmy's is a FNAF fan game made by Brian Dean Ullery."
+  />
+  <audio id="bg" loop>
+    <source src="assets/sounds/bg.mp3" type="audio/mpeg" />
+  </audio>
+  <style>
+    @font-face {
+      font-family: arcade;
+      src: url(/assets/ARCADECLASSIC.TTF);
+    }
 
-  body {
-    background: black;
-  }
-
-  #main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -281.25px;
-    margin-left: -500px;
-    width: 1000px;
-    height: 562.5px;
-    background: url(/assets/images/TitleScreen.gif) no-repeat center center;
-    background-size: contain;
-  }
-
-  #audioFullfillmentDiv {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background: black;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    transition: opacity 1s ease-out;
-  }
-
-  #audioFullfillmentText {
-    opacity: 0;
-    transition: opacity 1s ease-out;
-    font-family: arcade;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 50px;
-    letter-spacing: 3px;
-  }
-
-  .btn {
-    position: absolute;
-    left: 213px;
-    width: 175px;
-    height: 62px;
-    opacity: 0;
-    cursor: pointer;
-  }
-</style>
-
-<body oncontextmenu="return false;" onload="fullfillAudioRequirements()">
-  <div id="main">
-    <button
-      class="btn"
-      style="top: 158px"
-      onclick="document.getElementById('audioFullfillmentDiv').style.opacity = '1'; document.body.style.background = 'black'; $('#bg').animate({volume: 0}, 1000); setTimeout(()=>{document.getElementById('bg').pause(); window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'},1000);"
-    ></button
-    ><br />
-    <button
-      class="btn"
-      style="top: 231px"
-      onclick="localStorage.setItem('night', 1)"
-    ></button>
-    <button
-      style="
-        position: absolute;
-        top: 9px;
-        right: 16px;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        opacity: 0.7;
-        color: white;
-        font-size: 20px;
-      "
-      onclick="if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}"
-    >
-      &#x26F6;
-    </button>
-    <div
-      id="audioFullfillmentDiv"
-      onclick='document.getElementById("audioFullfillmentText").style.opacity = "0"; setTimeout(() => {this.style.opacity = "0"; this.style.pointerEvents = "none"; document.getElementById("bg").play(); }, 1000);'
-    >
-      <h1 id="audioFullfillmentText">
-        DISCLAIMER:<br /><br />This game contains loud noises and jumpscares,
-        albeit mild one's. Discretion is advised.<br />If you would like to
-        contact the developer about suggestions, bugs, or other inquiries,
-        please visit zero.jdbdu.org.<br /><br />Press anywhere to continue
-      </h1>
-    </div>
-  </div>
-  <iframe
-    style="
-      display: none;
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      width: 100vw;
-      height: 100vh;
-      border: none;
+    body {
       background: black;
-    "
-  ></iframe>
-  <script src="../jquery.min.js"></script>
-  <script>
-    fit();
-    window.addEventListener("message", function (event) {
-      localStorage.setItem("night", event.data);
-    });
+    }
 
-    function fit() {
-      var prevR = 0;
-      var r = 1;
-      while (r != prevR) {
-        prevR = r;
-        var width = document.getElementById("main").offsetWidth;
-        var height = document.getElementById("main").offsetHeight;
-        var windowWidth = $(document).outerWidth();
-        var windowHeight = $(document).outerHeight();
+    #main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -281.25px;
+      margin-left: -500px;
+      width: 1000px;
+      height: 562.5px;
+      background: url(/assets/images/TitleScreen.gif) no-repeat center center;
+      background-size: contain;
+    }
+
+    #audioFullfillmentDiv {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      transition: opacity 1s ease-out;
+    }
+
+    #audioFullfillmentText {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+      font-family: arcade;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 50px;
+      letter-spacing: 3px;
+    }
+
+    .btn {
+      position: absolute;
+      left: 213px;
+      width: 175px;
+      height: 62px;
+      opacity: 0;
+      cursor: pointer;
+    }
+  </style>
+
+  <body oncontextmenu="return false;" onload="fullfillAudioRequirements()">
+    <div id="main">
+      <button
+        class="btn"
+        style="top: 158px"
+        onclick="document.getElementById('audioFullfillmentDiv').style.opacity = '1'; document.body.style.background = 'black'; $('#bg').animate({volume: 0}, 1000); setTimeout(()=>{document.getElementById('bg').pause(); window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'},1000);"
+      ></button
+      ><br />
+      <button
+        class="btn"
+        style="top: 231px"
+        onclick="localStorage.setItem('night', 1)"
+      ></button>
+      <button
+        style="
+          position: absolute;
+          top: 9px;
+          right: 16px;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          opacity: 0.7;
+          color: white;
+          font-size: 20px;
+        "
+        onclick="if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}"
+      >
+        &#x26F6;
+      </button>
+      <div
+        id="audioFullfillmentDiv"
+        onclick='document.getElementById("audioFullfillmentText").style.opacity = "0"; setTimeout(() => {this.style.opacity = "0"; this.style.pointerEvents = "none"; document.getElementById("bg").play(); }, 1000);'
+      >
+        <h1 id="audioFullfillmentText">
+          DISCLAIMER:<br /><br />This game contains loud noises and jumpscares,
+          albeit mild one's. Discretion is advised.<br />If you would like to
+          contact the developer about suggestions, bugs, or other inquiries,
+          please visit zero.jdbdu.org.<br /><br />Press anywhere to continue
+        </h1>
+      </div>
+    </div>
+    <iframe
+      style="
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        background: black;
+      "
+    ></iframe>
+    <script src="../jquery.min.js"></script>
+    <script>
+      fit();
+      window.addEventListener("message", function (event) {
+        localStorage.setItem("night", event.data);
+      });
+
+      function fit() {
+        var prevR = 0;
         var r = 1;
-        r = Math.min(windowWidth / width, windowHeight / height);
+        while (r != prevR) {
+          prevR = r;
+          var width = document.getElementById("main").offsetWidth;
+          var height = document.getElementById("main").offsetHeight;
+          var windowWidth = $(document).outerWidth();
+          var windowHeight = $(document).outerHeight();
+          var r = 1;
+          r = Math.min(windowWidth / width, windowHeight / height);
 
-        $("#main").css({
-          "-webkit-transform": "scale(" + r + ")",
-          "-moz-transform": "scale(" + r + ")",
-          "-ms-transform": "scale(" + r + ")",
-          "-o-transform": "scale(" + r + ")",
-          transform: "scale(" + r + ")",
-        });
+          $("#main").css({
+            "-webkit-transform": "scale(" + r + ")",
+            "-moz-transform": "scale(" + r + ")",
+            "-ms-transform": "scale(" + r + ")",
+            "-o-transform": "scale(" + r + ")",
+            transform: "scale(" + r + ")",
+          });
+        }
+        document.body.style.transition = "background 1s ease-out";
+        document.body.style.background = "#0f0f0f";
       }
-      document.body.style.transition = "background 1s ease-out";
-      document.body.style.background = "#0f0f0f";
-    }
 
-    window.addEventListener("resize", fit);
+      window.addEventListener("resize", fit);
 
-    document.getElementById("audioFullfillmentText").style.opacity = "1";
-    function fullfillAudioRequirements() {
-      if (window.location !== window.parent.location) {
-        document.getElementById("audioFullfillmentText").style.display = "none";
-        document.getElementById("audioFullfillmentDiv").style.opacity = "0";
-        document.getElementById("audioFullfillmentDiv").style.pointerEvents =
-          "none";
-        document.getElementById("bg").play();
+      document.getElementById("audioFullfillmentText").style.opacity = "1";
+      function fullfillAudioRequirements() {
+        if (window.location !== window.parent.location) {
+          document.getElementById("audioFullfillmentText").style.display =
+            "none";
+          document.getElementById("audioFullfillmentDiv").style.opacity = "0";
+          document.getElementById("audioFullfillmentDiv").style.pointerEvents =
+            "none";
+          document.getElementById("bg").play();
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
+</html>
