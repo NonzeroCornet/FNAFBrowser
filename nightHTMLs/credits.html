@@ -21,39 +21,38 @@
     </div>
     <script src="../jquery.min.js"></script>
     <script>
-      if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+      if (
+        window.parent.location.href != "https://fnaj.jdbdu.org/" &&
+        Number(new URL(window.parent.location).searchParams.get("devmode")) != 1
+      )
         window.location.href = "https://fnaj.jdbdu.org/";
 
-      var width = document.getElementsByClassName("game")[0].offsetWidth;
-      var height = document.getElementsByClassName("game")[0].offsetHeight;
-      var windowWidth = $(document).outerWidth();
-      var windowHeight = $(document).outerHeight();
-      var r = 1;
-      r = Math.min(windowWidth / width, windowHeight / height);
-
-      $(".game").css({
-        "-webkit-transform": "scale(" + r + ")",
-        "-moz-transform": "scale(" + r + ")",
-        "-ms-transform": "scale(" + r + ")",
-        "-o-transform": "scale(" + r + ")",
-        transform: "scale(" + r + ")",
-      });
-      window.addEventListener("resize", () => {
-        var width = document.getElementsByClassName("game")[0].offsetWidth;
-        var height = document.getElementsByClassName("game")[0].offsetHeight;
-        var windowWidth = $(document).outerWidth();
-        var windowHeight = $(document).outerHeight();
+      function fit() {
+        var prevR = 0;
         var r = 1;
-        r = Math.min(windowWidth / width, windowHeight / height);
+        while (r != prevR) {
+          prevR = r;
+          var width = document.querySelector(".game").offsetWidth;
+          var height = document.querySelector(".game").offsetHeight;
+          var windowWidth = $(document).outerWidth();
+          var windowHeight = $(document).outerHeight();
+          var r = 1;
+          r = Math.min(windowWidth / width, windowHeight / height);
 
-        $(".game").css({
-          "-webkit-transform": "scale(" + r + ")",
-          "-moz-transform": "scale(" + r + ")",
-          "-ms-transform": "scale(" + r + ")",
-          "-o-transform": "scale(" + r + ")",
-          transform: "scale(" + r + ")",
-        });
-      });
+          $(".game").css({
+            "-webkit-transform": "scale(" + r + ")",
+            "-moz-transform": "scale(" + r + ")",
+            "-ms-transform": "scale(" + r + ")",
+            "-o-transform": "scale(" + r + ")",
+            transform: "scale(" + r + ")",
+          });
+        }
+        document.querySelector(".game").style.opacity = "1";
+      }
+
+      $(document).ready(fit);
+
+      window.addEventListener("resize", fit);
       document.getElementsByTagName("video")[0].play();
       var song = new Audio("/assets/sounds/sylviaNoTears.mp3");
       song.volume = 0.5;

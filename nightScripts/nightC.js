@@ -1,4 +1,7 @@
-if (window.parent.location.href != "https://fnaj.jdbdu.org/")
+if (
+  window.parent.location.href != "https://fnaj.jdbdu.org/" &&
+  Number(new URL(window.parent.location).searchParams.get("devmode")) != 1
+)
   window.location.href = "https://fnaj.jdbdu.org/";
 
 var atDoor2 = false;
@@ -96,6 +99,9 @@ function fit() {
       transform: "scale(" + r + ")",
     });
   }
+  document.body.style.transition = "background 1s ease-out";
+  document.body.style.background = "#0f0f0f";
+  document.querySelector(".game").style.opacity = "1";
 }
 
 $(document).ready(fit);
@@ -154,6 +160,7 @@ setTimeout(() => {
       clock.src = "/assets/images/6am.gif";
       time++;
       setTimeout(() => {
+        document.body.style.background = "black";
         nightEndNoise.play();
         document.getElementById("endNight").style.display = "block";
         setTimeout(() => {

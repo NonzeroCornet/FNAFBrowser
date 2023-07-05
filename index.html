@@ -10,7 +10,7 @@
   }
 
   body {
-    background: #0f0f0f;
+    background: black;
   }
 
   #main {
@@ -59,12 +59,12 @@
   }
 </style>
 
-<body oncontextmenu="return false;" onload="fit(); fullfillAudioRequirements()">
+<body oncontextmenu="return false;" onload="fullfillAudioRequirements()">
   <div id="main">
     <button
       class="btn"
       style="top: 158px"
-      onclick="document.getElementById('bg').pause(); window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'"
+      onclick="document.getElementById('audioFullfillmentDiv').style.opacity = '1'; document.body.style.background = 'black'; $('#bg').animate({volume: 0}, 1000); setTimeout(()=>{document.getElementById('bg').pause(); window.location !== window.parent.location ? window.location.href = '/nightHTMLs/night'+localStorage.getItem('night')+'.html' : document.getElementsByTagName('iframe')[0].style.display = 'block';document.getElementsByTagName('iframe')[0].src = '/nightHTMLs/night'+(localStorage.getItem('night') || 1)+'.html'},1000);"
     ></button
     ><br />
     <button
@@ -115,6 +115,7 @@
   ></iframe>
   <script src="../jquery.min.js"></script>
   <script>
+    fit();
     window.addEventListener("message", function (event) {
       localStorage.setItem("night", event.data);
     });
@@ -139,6 +140,8 @@
           transform: "scale(" + r + ")",
         });
       }
+      document.body.style.transition = "background 1s ease-out";
+      document.body.style.background = "#0f0f0f";
     }
 
     window.addEventListener("resize", fit);

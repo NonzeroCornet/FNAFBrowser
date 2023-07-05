@@ -9,7 +9,7 @@ img {
 }
 
 body {
-  background-color: #0f0f0f;
+  background: black;
 }
 
 .game {
@@ -22,6 +22,7 @@ body {
   height: 562.5px;
   background: url(assets/images/background.gif) no-repeat center center;
   background-size: contain;
+  opacity: 0;
 }
 
 .wallbtn {
