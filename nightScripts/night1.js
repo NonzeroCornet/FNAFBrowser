@@ -2,7 +2,7 @@ if (
   window.parent.location.href != "https://fnaj.briandean.dev/" &&
   Number(new URL(window.parent.location).searchParams.get("devmode")) != 1
 )
-  window.location.href = "https://fnaj.jdbdu.org/";
+  window.location.href = "https://fnaj.briandean.dev/";
 
 var atDoor2 = false;
 var door2Closed = false;
