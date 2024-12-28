@@ -106,7 +106,7 @@ window.addEventListener("resize", fit);
 setInterval(() => {
   if (door2Closed) {
     doorUseTime++;
-    if (doorUseTime > 30000) {
+    if (doorUseTime > 60000) {
       doorOpenNoise.play();
       door2Closed = false;
       doorClosed.style.opacity = 0;
@@ -116,13 +116,13 @@ setInterval(() => {
       }, 20);
     }
   }
-  if (doorUseTime > 30000) {
+  if (doorUseTime > 60000) {
     doorClosed.style.opacity = 0;
     doorClosing.style.opacity = 0;
   }
   if (doorlightOn) {
     lightUseTime++;
-    if (lightUseTime > 30000) {
+    if (lightUseTime > 60000) {
       emptyDoorLight.style.opacity = 0;
       badDoorLight.style.opacity = 0;
       document.querySelectorAll("button")[1].style.background = "transparent";
@@ -173,7 +173,7 @@ setTimeout(() => {
 }, 6000);
 
 function activateLight(btn) {
-  if (lightUseTime < 300000) {
+  if (lightUseTime < 600000) {
     if (door2Closed || doorlightOn) {
       emptyDoorLight.style.opacity = 0;
       badDoorLight.style.opacity = 0;
@@ -196,7 +196,7 @@ function activateLight(btn) {
   }
 }
 function closeDoor(btn) {
-  if (doorUseTime < 300000) {
+  if (doorUseTime < 600000) {
     if (door2Closed) {
       doorOpenNoise.play();
       door2Closed = false;
@@ -210,13 +210,13 @@ function closeDoor(btn) {
       door2Closed = true;
       doorlightOn = false;
       buzzingNoise.pause();
-      doorClosing.style.opacity = Number(doorUseTime < 300000);
+      doorClosing.style.opacity = Number(doorUseTime < 600000);
       emptyDoorLight.style.opacity = 0;
       badDoorLight.style.opacity = 0;
       document.querySelectorAll("button")[1].style.background = "transparent";
       btn.style.background = "darkred";
       setTimeout(() => {
-        doorClosed.style.opacity = Number(doorUseTime < 300000);
+        doorClosed.style.opacity = Number(doorUseTime < 600000);
         sirenNoise.volume = 0;
       }, 20);
     }
@@ -377,7 +377,7 @@ function spookyNoises() {
     noise.volume = 0.5;
   }
   noise.play();
-  setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 30000));
+  setTimeout(spookyNoises, Math.round(Math.random() * 60000 + 60000));
 }
 
 function halHubert() {
