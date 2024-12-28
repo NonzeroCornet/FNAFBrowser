@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <title>Five Nights At Jimmy's</title>
   <link rel="icon" href="/assets/images/favicon.png" />
@@ -123,8 +123,12 @@
     <script>
       fit();
       window.addEventListener("message", function (event) {
-        localStorage.setItem("night", event.data);
+        if (typeof event.data != "object")
+          localStorage.setItem("night", event.data);
       });
+      if (!localStorage.getItem("night")) {
+        localStorage.setItem("night", 1);
+      }
 
       function fit() {
         var prevR = 0;
