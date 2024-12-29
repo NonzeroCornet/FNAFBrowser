@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -22,10 +22,10 @@
     <script src="../jquery.min.js"></script>
     <script>
       if (
-        window.parent.location.href != "https://fnaj.jdbdu.org/" &&
+        window.parent.location.href != "https://fnaj.briandean.dev/" &&
         Number(new URL(window.parent.location).searchParams.get("devmode")) != 1
       )
-        window.location.href = "https://fnaj.jdbdu.org/";
+        window.location.href = "https://fnaj.briandean.dev/";
 
       function fit() {
         var prevR = 0;
@@ -54,7 +54,7 @@
 
       window.addEventListener("resize", fit);
       document.getElementsByTagName("video")[0].play();
-      var song = new Audio("/assets/sounds/sylviaNoTears.mp3");
+      var song = new Audio("/assets/sounds/sylviaNoTears.wav");
       song.volume = 0.5;
 
       setTimeout(() => {
@@ -85,6 +85,11 @@
                       "../assets/images/credits4.png";
                     document.getElementsByTagName("img")[0].style.opacity =
                       "100%";
+                    document.addEventListener("keydown", (event) => {
+                      if (event.key == " ") {
+                        window.location.href = "/";
+                      }
+                    });
                   }, 2000);
                 }, 5000);
               }, 2000);
