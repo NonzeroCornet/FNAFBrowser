@@ -434,16 +434,23 @@ function halHubert() {
   );
 }
 
-setTimeout(() => {
-  spookyNoises();
-  setInterval(() => {
+var theFoxIsComing = true;
+
+function theFox() {
+  if (theFoxIsComing) {
     if (leftDoorBad.style.opacity < 1) {
-      if (foxDifficulty != 0) {
-        leftDoorBad.style.opacity =
-          Number(leftDoorBad.style.opacity) +
-          0.002 * (foxDifficulty / 4 + time);
+      leftDoorBad.style.opacity =
+        Number(leftDoorBad.style.opacity) + 0.02 * (foxDifficulty / 4 + time);
+      if (
+        leftDoorBad.style.opacity >
+        1 - 0.02 * (foxDifficulty / 4 + time) * 10
+      ) {
+        fanNoise.volume = 0;
+        heartBeatNoise.currentTime = 0;
+        heartBeatNoise.play();
       }
     } else if (map.style.display == "none" && time != 5) {
+      heartBeatNoise.pause();
       document.getElementById("jumpscare3").style.display = "block";
       sirenNoise.volume = 0;
       fanNoise.volume = 0;
@@ -451,11 +458,33 @@ setTimeout(() => {
       setTimeout(() => {
         window.location.href = "/";
       }, 3000);
-    } else {
-      leftDoorBad.style.opacity = 0;
     }
-  }, 10);
-}, Math.round(Math.random() * 10000) + 118000);
+    if (map.style.display == "block" && leftDoorBad.style.opacity > 0.6) {
+      heartBeatNoise.pause();
+      fanNoise.volume = 1;
+      leftDoorBad.style.opacity = 0;
+      theFoxIsComing = false;
+      setTimeout(
+        () => {
+          theFoxIsComing = true;
+        },
+        (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
+      );
+    }
+  }
+  setTimeout(theFox, 100);
+}
+
+setTimeout(
+  () => {
+    spookyNoises();
+    setTimeout(
+      theFox,
+      (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
+    );
+  },
+  Math.round(Math.random() * 10000) + 118000
+);
 
 document.body.onload = () => {
   $("img").mousedown(function (e) {

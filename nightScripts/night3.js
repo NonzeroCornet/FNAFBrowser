@@ -421,26 +421,32 @@ function theFox() {
         window.location.href = "/";
       }, 3000);
     }
-    if (map.style.display == "block" && leftDoorBad.style.opacity > 0.8) {
+    if (map.style.display == "block" && leftDoorBad.style.opacity > 0.6) {
       heartBeatNoise.pause();
       fanNoise.volume = 1;
       leftDoorBad.style.opacity = 0;
       theFoxIsComing = false;
-      setTimeout(() => {
-        theFoxIsComing = true;
-      }, (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200);
+      setTimeout(
+        () => {
+          theFoxIsComing = true;
+        },
+        (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
+      );
     }
   }
   setTimeout(theFox, 100);
 }
 
-setTimeout(() => {
-  spookyNoises();
-  setTimeout(
-    theFox,
-    (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
-  );
-}, Math.round(Math.random() * 10000) + 118000);
+setTimeout(
+  () => {
+    spookyNoises();
+    setTimeout(
+      theFox,
+      (Math.random() * 12500) / (foxDifficulty / 4 + time) + 13200
+    );
+  },
+  Math.round(Math.random() * 10000) + 118000
+);
 
 document.body.onload = () => {
   $("img").mousedown(function (e) {
